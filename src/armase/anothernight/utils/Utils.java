@@ -3,9 +3,10 @@ package armase.anothernight.utils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Utils {
 
@@ -33,5 +34,32 @@ public class Utils {
 			e.printStackTrace();
 			return 0;
 		}
+	}
+	
+	public static int generateRandomMinMax(int min, int max) {
+		max++;
+		Random rnd = new Random();
+		return rnd.nextInt(max - min) + min;
+	}
+	
+	public static String readConsoleInput() {
+		Scanner scanner = new Scanner(System.in);
+		String outString = scanner.next().toString();
+		// scanner.close() breaks stuff
+		return outString;
+	}
+	
+	public static void waitInMs(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static String getDateTimeStamp() {
+		Date today = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		return "[ " + formatter.format(today) + " ]";
 	}
 }

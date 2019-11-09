@@ -6,7 +6,8 @@ import armase.anothernight.input.KeyManager;
 // LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
 
 public class Handler {
-	
+
+	/*
 	private Game game;
 	
 	public Handler(Game game) {
@@ -32,4 +33,5 @@ public class Handler {
 	public void setGame(Game game) {
 		this.game = game;
 	}
+	*/
 }

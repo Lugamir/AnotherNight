@@ -1,65 +1,117 @@
 package armase.anothernight.entities.creatures;
 
-import armase.anothernight.Handler;
-import armase.anothernight.entities.Entity;
-
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
-
-public abstract class Creature extends Entity {
+public abstract class Creature {
 	
-	public static final int DEFAULT_HEALTH = 10;
-	public static final float DEFAULT_SPEED = 3.0f;
-	public static final int DEFAULT_CREATURE_WIDTH = 32,
-							DEFAULT_CREATURE_HEIGHT = 32;
-
-	protected int health;
-	protected float speed;
-	protected float xMove, yMove;
+	/*
+	# idleAnim: Animation
+	# attackAnim: Animation
+	# damagedAnim: Animation
+	# buffAnim: Animation
+	# debuffAnim: Animation
+	# deathAnim: Animation
+	*/
 	
-	public Creature(Handler handler, float x, float y, int width, int height) {
-		super(handler, x, y, width, height);
-		health = DEFAULT_HEALTH;
-		speed = DEFAULT_SPEED;
-		xMove = 0;
-		yMove = 0;
+	protected String name;
+	protected int currentHp, maxHp;
+	protected int power, defense;
+	
+	public Creature(String name, int currentHp, int maxHp, int power, int defense) {
+		this.name = name;
+		this.currentHp = currentHp;
+		this.maxHp = maxHp;
+		this.power = power;
+		this.defense = defense;
 	}
 	
-	public void move() {
-		
+	// fallback easter egg TODO : cannot instantiate creature (abstract)
+	public Creature() {
+		name = "~UnKnOwN~";
+		currentHp = 1;
+		maxHp = 1;
+		power = 50;
+		defense = 999;
 	}
-
-	// GETTERS & SETTERS
 	
-	public int getHealth() {
-		return health;
+	// "Attack" Ability
+	public int dealDamageToOpponent(Creature receiver) {
+		int dmgDone = calculateDamageToOpponent(receiver);
+		receiver.receiveDamage(dmgDone);
+		return dmgDone;
+	}
+	
+	private int calculateDamageToOpponent(Creature receiver) {
+		int dmg = power - (receiver.getDefense() / 3);
+		if (dmg < 1)
+			dmg = 1;
+		return dmg;
+	}
+	
+	public void receiveDamage(int receivedDmg) {
+		currentHp -= receivedDmg;
+		if (currentHp < 0)
+			currentHp = 0;
+	}
+	
+	// "Battle Cry" Ability
+	public void debuffPowerOfOpponent(Creature receiver) {
+		this.buffPower(1); // TODO : diminishing returns
+		receiver.debuffPower(1); // TODO : diminishing returns
+		receiver.buffDefense(1); // TODO : diminishing returns
+	}
+	
+	public void buffPower(int addedPwr) {
+		power += addedPwr;
+	}
+	
+	public void debuffPower(int subtractedPwr) {
+		power -= subtractedPwr;
+	}
+	
+	// "Shields Up" Ability
+	public void buffOwnDefense() {
+		this.buffDefense(1); // TODO : diminishing returns
+	}
+	
+	public void buffDefense(int addedDef) {
+		defense += addedDef;
+	}
+	
+	public void debuffDefense(int subtractedDef) {
+		defense -= subtractedDef;
+	}
+	
+	public void receiveHeal(int addedHp) {
+		currentHp += addedHp;
+	}
+	
+	public boolean isAlive() {
+		return currentHp > 0;
+	}
+	
+	public void kill() {
+		currentHp = 0;
+	}
+	
+	// ### GETTERS & SETTERS
+
+	public String getName() {
+		return name;
 	}
 
-	public void setHealth(int health) {
-		this.health = health;
+	public int getCurrentHp() {
+		return currentHp;
 	}
 
-	public float getSpeed() {
-		return speed;
+	public int getMaxHp() {
+		return maxHp;
 	}
 
-	public void setSpeed(float speed) {
-		this.speed = speed;
+	public int getPower() {
+		return power;
 	}
 
-	public float getxMove() {
-		return xMove;
+	public int getDefense() {
+		return defense;
 	}
 
-	public void setxMove(float xMove) {
-		this.xMove = xMove;
-	}
-
-	public float getyMove() {
-		return yMove;
-	}
-
-	public void setyMove(float yMove) {
-		this.yMove = yMove;
-	}	
 }
