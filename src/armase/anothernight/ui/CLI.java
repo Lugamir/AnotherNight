@@ -13,10 +13,10 @@ public class CLI {
 	private static ArrayList<String> scoreboard = new ArrayList<String>();
 	
 	private static String[] versionStampMsgs = new String[] {
-			"Another Night ~ " + version + " ~ by Team ARMASE <3",
-			"Another Night ~ " + version + " ~ by Team ARMASE :3",
-			"Another Night ~ " + version + " ~ by Team ARMASE ¯\\_(ツ)_/¯",
-			"Another Night ~ " + version + " ~ by Team ARMASE c:"
+			"~ Another Night ~ " + version + " ~ by Team ARMASE <3",
+			"~ Another Night ~ " + version + " ~ by Team ARMASE :3",
+			"~ Another Night ~ " + version + " ~ by Team ARMASE ¯\\_(ツ)_/¯",
+			"~ Another Night ~ " + version + " ~ by Team ARMASE c:"
 			};
 	private static String[] welcomeMsgs = new String[] {
 			"                       _   _                 _   _ _       _     _   \r\n" + 
@@ -137,9 +137,7 @@ public class CLI {
 				+ "\n         to prove your worth to the Amazing Warrior Guild (TM)...");
 		System.out.println();
 		System.out.println("(ANother NIght -> Anni ~ get it?)"
-				+ "\n~ Endless Encounters " + version
-				+ "\n~ by Team ARMASE:"
-				+ "\n  ~ ARti, MAnni, SEbi");
+				+ "\n" + versionStampMsgs[Utils.generateRandomMinMax(0, versionStampMsgs.length - 1)]);
 	}
 
 	public static void writeJourneyBeginning() {
