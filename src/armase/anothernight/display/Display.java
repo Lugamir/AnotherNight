@@ -5,9 +5,6 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
-
 public class Display {
 	
 	private JFrame frame;

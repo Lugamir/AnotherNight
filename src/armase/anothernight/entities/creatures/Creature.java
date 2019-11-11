@@ -1,16 +1,32 @@
 package armase.anothernight.entities.creatures;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import armase.anothernight.Handler;
+import armase.anothernight.gfx.Animation;
+
 public abstract class Creature {
 	
+	protected Handler handler;
+	protected boolean isEnemy;
+
+	// Animations
+	protected Animation animIdle, animAttack, animDeath;
+	
 	/*
-	# idleAnim: Animation
-	# attackAnim: Animation
 	# damagedAnim: Animation
 	# buffAnim: Animation
 	# debuffAnim: Animation
-	# deathAnim: Animation
 	*/
 	
+	// Position
+	protected int xPos = 80, yPos = 400;
+	
+	// Size
+	protected int width = 160, height = 160;
+	
+	// Stats
 	protected String name;
 	protected int currentHp, maxHp;
 	protected int power, defense;
@@ -23,13 +39,50 @@ public abstract class Creature {
 		this.defense = defense;
 	}
 	
-	// fallback easter egg TODO : cannot instantiate creature (abstract)
-	public Creature() {
-		name = "~UnKnOwN~";
-		currentHp = 1;
-		maxHp = 1;
-		power = 50;
-		defense = 999;
+	public Creature(String name, int currentHp, int maxHp, int power, int defense, Handler handler) {
+		this.name = name;
+		this.currentHp = currentHp;
+		this.maxHp = maxHp;
+		this.power = power;
+		this.defense = defense;
+		this.handler = handler;
+	}
+	
+	public void tick() {
+		// Tick all animations here!
+		animIdle.tick();
+//		animAttack.tick();
+//		animDeath.tick();
+	}
+	
+	public void render(Graphics g) {
+		// TODO : render where exactly? (responsive?)
+		g.drawImage(getCurrentAnimationFrame(),
+				xPos, yPos, width, height, null);
+	}
+	
+	protected BufferedImage getCurrentAnimationFrame() {
+		// TODO : if structure that returns images based on what creature is doing
+		return animIdle.getCurrentFrame();
+	}
+	
+	public void scaleUpMultipler(int multiplier) {
+		width *= multiplier;
+		height *= multiplier;		
+	}
+	
+	public Creature setPosition(int x, int y) {
+		xPos = x;
+		yPos = y;
+		return this;
+	}
+	
+	public void autoPosition() {
+		if (this.isEnemy) {
+			this.setPosition(handler.getWidth() / 3, handler.getHeight() / 3 * 2);
+		} else {
+			this.setPosition(handler.getWidth() / 3 * 2, handler.getHeight() / 3 * 2);
+		}
 	}
 	
 	// "Attack" Ability
@@ -114,4 +167,19 @@ public abstract class Creature {
 		return defense;
 	}
 
+	public int getxPos() {
+		return xPos;
+	}
+
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+
+	public int getyPos() {
+		return yPos;
+	}
+
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
+	}
 }

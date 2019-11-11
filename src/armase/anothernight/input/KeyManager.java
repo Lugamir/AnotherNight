@@ -3,9 +3,6 @@ package armase.anothernight.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
-
 public class KeyManager implements KeyListener {
 	
 	private boolean[] keys;

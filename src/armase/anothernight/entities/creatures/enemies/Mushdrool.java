@@ -5,23 +5,23 @@ import armase.anothernight.entities.creatures.Creature;
 import armase.anothernight.gfx.Animation;
 import armase.anothernight.gfx.Assets;
 
-public class SneakySkeleton extends Creature {
-
-	public SneakySkeleton() {
-		super("Sneaky Skeleton", 10, 10, 5, 3);
+public class Mushdrool extends Creature {
+	
+	public Mushdrool() {
+		super("Mushdrool", 20, 20, 8, 15);
 		isEnemy = true;
 		
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
-		animIdle = new Animation(animSpeed, Assets.skeleton_idle);
+		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
 	}
 	
-	public SneakySkeleton(Handler handler) {
-		super("Sneaky Skeleton", 10, 10, 5, 3, handler);
+	public Mushdrool(Handler handler) {
+		super("Mushdrool", 20, 20, 8, 15, handler);
 		isEnemy = true;
 		
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
-		animIdle = new Animation(animSpeed, Assets.skeleton_idle);
+		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
 	}
 }

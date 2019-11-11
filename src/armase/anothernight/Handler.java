@@ -1,14 +1,13 @@
 package armase.anothernight;
 
+import armase.anothernight.gfx.BackdropManager;
 import armase.anothernight.input.KeyManager;
-
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
+import armase.anothernight.input.MouseManager;
+import armase.anothernight.worlds.World;
 
 public class Handler {
-
-	/*
 	private Game game;
+	private World world;
 	
 	public Handler(Game game) {
 		this.game = game;
@@ -16,6 +15,10 @@ public class Handler {
 
 	public KeyManager getKeyManager() {
 		return game.getKeyManager();
+	}
+
+	public MouseManager getMouseManager() {
+		return game.getMouseManager();
 	}
 	
 	public int getWidth() {
@@ -33,5 +36,16 @@ public class Handler {
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	*/
+
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
+	}
+	
+	public BackdropManager getBackdropManager() {
+		return game.getBackdropManager();
+	}
 }

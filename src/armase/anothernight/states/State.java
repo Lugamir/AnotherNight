@@ -4,9 +4,6 @@ import java.awt.Graphics;
 
 import armase.anothernight.Handler;
 
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
-
 public abstract class State {
 	
 	// Game State Manager

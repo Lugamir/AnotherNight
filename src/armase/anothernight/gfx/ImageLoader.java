@@ -5,9 +5,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
-
 public class ImageLoader {
 	
 	public static BufferedImage loadImage(String path) {

@@ -3,23 +3,26 @@ package armase.anothernight.states;
 import java.awt.Graphics;
 
 import armase.anothernight.Handler;
-
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
+import armase.anothernight.worlds.World;
 
 public class GameState extends State {
 
+	// Worlds
+	private World world;
+	
 	public GameState(Handler handler) {
 		super(handler);
+		world = new World(handler);
+		handler.setWorld(world);
 	}
 	
 	@Override
 	public void tick() {
-		
+		world.tick();
 	}
 
 	@Override
 	public void render(Graphics g) {
-		
+		world.render(g);
 	}
 }

@@ -1,21 +1,28 @@
 package armase.anothernight;
 
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+
+import armase.anothernight.display.Display;
 import armase.anothernight.entities.creatures.Creature;
 import armase.anothernight.entities.creatures.Player;
 import armase.anothernight.entities.creatures.enemies.Boss;
 import armase.anothernight.entities.creatures.enemies.DangerDoggo;
-import armase.anothernight.entities.creatures.enemies.GooeyGhost;
+import armase.anothernight.entities.creatures.enemies.Mushdrool;
 import armase.anothernight.entities.creatures.enemies.HiddenBug;
 import armase.anothernight.entities.creatures.enemies.SneakySkeleton;
+import armase.anothernight.gfx.Assets;
+import armase.anothernight.gfx.BackdropManager;
+import armase.anothernight.input.KeyManager;
+import armase.anothernight.input.MouseManager;
+import armase.anothernight.states.GameState;
+import armase.anothernight.states.MenuState;
+import armase.anothernight.states.State;
 import armase.anothernight.ui.CLI;
 import armase.anothernight.utils.Utils;
 
-// TODO : This file is an example, use it as a template or delete it
-// LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
-
 public class Game implements Runnable {
 	
-	/* ### Reference for graphical design
 	private Display display;
 	private int width, height;
 	
@@ -31,26 +38,137 @@ public class Game implements Runnable {
 	
 	// Input
 	private KeyManager keyManager;
+	private MouseManager mouseManager;
+	
+	// Backdrop
+	private BackdropManager backdropManager;
 	
 	// Handler
 	private Handler handler;
-	*/
 
+	// Game Variables
 	public String title;
 	private final int enemyTypes = 3;
 	private int nightCounter;
 		
 	public Game(String title, int width, int height) {
 		this.title = title;
-		
-		/*
 		this.width = width;
 		this.height = height;
+		
 		keyManager = new KeyManager();
-		*/
+		mouseManager = new MouseManager();
+	}
+	
+	private void init() {
+		display = new Display(title, width, height);
+		display.getFrame().addKeyListener(keyManager);
+		// MouseListener on frame & canvas prevents problems in different environments
+		display.getFrame().addMouseListener(mouseManager);
+		display.getFrame().addMouseMotionListener(mouseManager);
+		display.getCanvas().addMouseListener(mouseManager);
+		display.getCanvas().addMouseMotionListener(mouseManager);
+		Assets.init();
+		
+		handler = new Handler(this);
+
+		backdropManager = new BackdropManager(handler);
+		
+		gameState = new GameState(handler);
+		menuState = new MenuState(handler);
+		State.setState(menuState); // state on startup
 	}
 	
 	public void run() {
+		init();
+		
+		int fps = 60; // tick&renders per second
+		double timePerTick = 1_000_000_000 / fps; // max amount of time to execute tick&renders to achieve fps
+		double delta = 0; // tick&renders to do to keep the pace
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
+		while(running) {
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
+			lastTime = now;
+			
+			if(delta >= 1) {
+				tick();
+				render();
+				ticks++;
+				delta--;
+			}
+			
+			if(timer >= 1_000_000_000) {
+				System.out.println("Ticks & Frames: " + ticks);
+				ticks = 0;
+				timer = 0;
+			}
+		}
+		
+//		runConsoleVersion();
+		
+		stop();
+	}
+	
+	private void tick() { // == update buffers
+		keyManager.tick();
+		
+		if(State.getState() != null)
+			State.getState().tick();
+	}
+	
+	private void render() {
+		bs = display.getCanvas().getBufferStrategy();
+		
+		if(bs == null) {
+			display.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		
+		g = bs.getDrawGraphics();
+		// Clear Screen
+		g.clearRect(0, 0, width, height);
+		// Draw Here!
+		
+		if(State.getState() != null)
+			State.getState().render(g);
+		
+		// End Drawing!
+		bs.show();
+		g.dispose();
+	}
+
+	private void playRound() {
+		playConsoleRound();
+	}
+	
+	public synchronized void start() {
+		if(running)
+			return;
+		
+		running = true;
+		thread = new Thread(this);
+		thread.start(); // calls this.run()
+	}
+	
+	public synchronized void stop() {
+		if(!running)
+			return;
+		
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void runConsoleVersion() {
 		// Console Version
 		CLI.writeWelcomeMsg();
 		CLI.writeRandomMotd();
@@ -61,7 +179,7 @@ public class Game implements Runnable {
 			
 			switch (CLI.readConsoleInput()) {
 			case "play":
-				play();
+				playRound();
 				break;
 			case "scobo":
 				CLI.writeScoreboard();
@@ -85,7 +203,7 @@ public class Game implements Runnable {
 		}
 	}
 
-	private void play() {
+	private void playConsoleRound() {
 		Creature player = new Player();
 		nightCounter = 1;
 		Creature enemy;
@@ -196,11 +314,12 @@ public class Game implements Runnable {
 	}
 	
 	private Creature generateRndEnemy() {
-		switch (Utils.generateRandomMinMax(1, enemyTypes)) { // TODO : Creature Factory
+		// TODO : Creature Factory
+		switch (Utils.generateRandomMinMax(1, enemyTypes)) {
 		case 1:
 			return new SneakySkeleton();
 		case 2:
-			return new GooeyGhost();
+			return new Mushdrool();
 		case 3:
 			return new DangerDoggo();
 		default:
@@ -228,106 +347,18 @@ public class Game implements Runnable {
 		}
 	}
 	
-	/*  ### Reference for graphical design
-	private void init() {
-		display = new Display(title, width, height);
-		display.getFrame().addKeyListener(keyManager);
-		Assets.init();
-		
-		handler = new Handler(this);
-		
-		gameState = new GameState(handler);
-		menuState = new MenuState(handler);
-		State.setState(menuState); // state on startup
-	}
-		
-	private void tick() { // == update buffers
-		keyManager.tick();
-		
-		if(State.getState() != null)
-			State.getState().tick();
-	}
-		
-	private void render() {
-		bs = display.getCanvas().getBufferStrategy();
-		if(bs == null) {
-			display.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-		// Clear Screen
-		g.clearRect(0, 0, width, height);
-		// Draw Here!
-		
-		if(State.getState() != null)
-			State.getState().render(g);
-		
-		// End Drawing!
-		bs.show();
-		g.dispose();
-	}
-	
-	##### This block was in run() !!!
-	
-		init();
-	
-		int fps = 60; // tick&renders per second
-		double timePerTick = 1_000_000_000 / fps; // max amount of time to execute tick&renders to achieve fps
-		double delta = 0; // tick&renders to do to keep the pace
-		long now;
-		long lastTime = System.nanoTime();
-		long timer = 0;
-		int ticks = 0;
-	
-		while(running) {
-			now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;
-			timer += now - lastTime;
-			lastTime = now;
-		
-			if(delta >= 1) {
-				tick();
-				render();
-				ticks++;
-				delta--;
-			}
-		
-			if(timer >= 1_000_000_000) {
-				System.out.println("Ticks & Frames: " + ticks);
-				ticks = 0;
-				timer = 0;
-			}
-		}
-	
-		stop();
-		
-	##### Until this point, yesyes I know, awful code design etc. Write it somewhere I cant't see cuz I already know
-
-	public synchronized void start() {
-		if(running)
-			return;
-		
-		running = true;
-		thread = new Thread(this);
-		thread.start(); // calls this.run()
-	}
-	
-	public synchronized void stop() {
-		if(!running)
-			return;
-		
-		running = false;
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	// ### GETTERS & SETTERS
 	
 	public KeyManager getKeyManager() {
 		return keyManager;
+	}
+	
+	public MouseManager getMouseManager() {
+		return mouseManager;
+	}
+
+	public BackdropManager getBackdropManager() {
+		return backdropManager;
 	}
 	
 	public int getWidth() {
@@ -337,5 +368,4 @@ public class Game implements Runnable {
 	public int getHeight() {
 		return height;
 	}
-	*/
 }

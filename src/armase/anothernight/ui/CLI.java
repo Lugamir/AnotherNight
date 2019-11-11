@@ -268,7 +268,7 @@ public class CLI {
 		System.out.println();
 		if(nightReached <= 3) {
 			System.out.println("Haha, you see?"
-					+ "\nThis is exactly why we don't accept you in out guild"
+					+ "\nThis is exactly why we don't accept you in our guild!"
 					+ "\nNight reached : " + nightReached
 					+ "\nPathetic!");
 		} else if(nightReached <= 6)

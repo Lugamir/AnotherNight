@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 // This is the launcher for the console line version
 // This class must be specified as Main in build when building console version
 // IF PATH OR FILE NAME HAVE WHITESPACES IT WON't WORK
-// TODO : Delete this class when the graphical version is ready
 
 public class ConsoleLauncher {
 	public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException {
