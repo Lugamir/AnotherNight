@@ -3,11 +3,9 @@ package armase.anothernight;
 import armase.anothernight.gfx.BackdropManager;
 import armase.anothernight.input.KeyManager;
 import armase.anothernight.input.MouseManager;
-import armase.anothernight.worlds.World;
 
 public class Handler {
 	private Game game;
-	private World world;
 	
 	public Handler(Game game) {
 		this.game = game;
@@ -35,14 +33,6 @@ public class Handler {
 
 	public void setGame(Game game) {
 		this.game = game;
-	}
-
-	public World getWorld() {
-		return world;
-	}
-
-	public void setWorld(World world) {
-		this.world = world;
 	}
 	
 	public BackdropManager getBackdropManager() {

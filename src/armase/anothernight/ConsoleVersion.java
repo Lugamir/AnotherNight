@@ -1,9 +1,5 @@
-package armase.anothernight.worlds;
+package armase.anothernight;
 
-import java.awt.Graphics;
-
-import armase.anothernight.Handler;
-import armase.anothernight.entities.EntityManager;
 import armase.anothernight.entities.creatures.Creature;
 import armase.anothernight.entities.creatures.Player;
 import armase.anothernight.entities.creatures.enemies.Boss;
@@ -12,47 +8,51 @@ import armase.anothernight.entities.creatures.enemies.HiddenBug;
 import armase.anothernight.entities.creatures.enemies.Mushdrool;
 import armase.anothernight.entities.creatures.enemies.SneakySkeleton;
 import armase.anothernight.ui.CLI;
-import armase.anothernight.ui.GUI;
 import armase.anothernight.utils.Utils;
 
-public class World {
+public class ConsoleVersion {
 	
-	private Handler handler;
-	private GUI gui;
-	private int width, height;
-	
-	// Entities
-	private EntityManager entityManager;
-	
-	// run specific variables
-	Creature player, enemy;
+	private int nightCounter = 0;
 	private final int enemyTypes = 3;
-	private int nightCounter;
-	
-	public World(Handler handler) {
-		this.handler = handler;
-		this.gui = new GUI(handler);
-		
-		// Test
-		player = new Player(handler);
-		gui.setPlayer(player);
-		entityManager = new EntityManager(handler, player);
-		
-		enemy = generateRndEnemy();
-		gui.setEnemy(enemy);
-		entityManager.addEntity(enemy);
-	}
-	
-	public void tick() {
-		handler.getBackdropManager().tick();
-		entityManager.tick();
-	}
-	
-	public void render(Graphics g) {
-		handler.getBackdropManager().render(g);
-		entityManager.render(g);
+	private CLI cli;
 
-		// TODO : render UI
+	public ConsoleVersion() {
+		cli = new CLI(System.console());
+		start();
+	}
+	
+	private void start() {
+		cli.writeWelcomeMsg();
+		cli.writeRandomMotd();
+		Utils.waitInMs(1000);
+		
+		while(true) {
+			cli.writeMainMenu();
+			
+			switch (cli.readConsoleInput()) {
+			case "play":
+				playRound();
+				break;
+			case "scobo":
+				cli.writeScoreboard();
+				cli.enterToContinue();
+				break;
+			case "info":
+				Utils.waitInMs(1000);
+				cli.writeGameInfo();
+				Utils.waitInMs(1000);
+				cli.enterToContinue();
+				break;
+			case "quit":
+				Utils.waitInMs(1000);
+				cli.writeExitMsg();
+				Utils.waitInMs(1500);
+				return;
+			default:
+				cli.writeBadInput();
+				break;
+			}
+		}
 	}
 	
 	private void playRound() {
@@ -61,11 +61,11 @@ public class World {
 		Creature enemy;
 		
 		Utils.waitInMs(1500);
-		CLI.writeJourneyBeginning();
+		cli.writeJourneyBeginning();
 		
 		while(player.isAlive() && nightCounter <= 10) {
 			Utils.waitInMs(1500);
-			CLI.writeNightCount(nightCounter);
+			cli.writeNightCount(nightCounter);
 			Utils.waitInMs(1500);
 			
 			if(nightCounter == 10)
@@ -73,38 +73,38 @@ public class World {
 			else
 				enemy = generateRndEnemy();
 			
-			CLI.writeCreatureAppearance(enemy);
+			cli.writeCreatureAppearance(enemy);
 			
 			if(randomEnemyGetsFirstAttack()) {
-				CLI.writeEnemyGotFirstMove(enemy);
-				CLI.writeCreatureAttacksCreature(enemy, player, enemy.dealDamageToOpponent(player));
+				cli.writeEnemyGotFirstMove(enemy);
+				cli.writeCreatureAttacksCreature(enemy, player, enemy.dealDamageToOpponent(player));
 			}
 			
 			while(enemy.isAlive() && player.isAlive()) {
 				// TODO : revert buffs after fight
 				
 				Utils.waitInMs(1500);
-				CLI.writeCreatureStatus(player);
-				CLI.writeCreatureStatus(enemy);
-				CLI.writeFightMenu();
+				cli.writeCreatureStatus(player);
+				cli.writeCreatureStatus(enemy);
+				cli.writeFightMenu();
 				
-				switch(CLI.readConsoleInput()) {
+				switch(cli.readConsoleInput()) {
 				case "atk":
-					CLI.writeCreatureAttacksCreature(player, enemy, player.dealDamageToOpponent(enemy));
+					cli.writeCreatureAttacksCreature(player, enemy, player.dealDamageToOpponent(enemy));
 					break;
 				case "bc":
-					CLI.writeCreatureBattleCry(player);
+					cli.writeCreatureBattleCry(player);
 					player.debuffPowerOfOpponent(enemy);
-					CLI.writeCreatureDebuffed(enemy);
+					cli.writeCreatureDebuffed(enemy);
 					break;
 				case "su":
-					CLI.writeCreatureShieldsUp(player);
+					cli.writeCreatureShieldsUp(player);
 					player.buffOwnDefense();
-					CLI.writeCreatureBuffed(player);
+					cli.writeCreatureBuffed(player);
 					break;
 				case "info":
-					CLI.writeFightMenuInfo();
-					CLI.enterToContinue();
+					cli.writeFightMenuInfo();
+					cli.enterToContinue();
 					break;
 				case "suicide": // for testing
 					player.kill();
@@ -113,30 +113,30 @@ public class World {
 					enemy.kill();
 					break;
 				default:
-					CLI.writeCreatureConfused(player);
+					cli.writeCreatureConfused(player);
 					break;
 				}
 				
 				Utils.waitInMs(1500);
 				
 				if(enemy.isAlive())
-					CLI.writeCreatureAttacksCreature(enemy, player, enemy.dealDamageToOpponent(player));
+					cli.writeCreatureAttacksCreature(enemy, player, enemy.dealDamageToOpponent(player));
 				// TODO : default enemy AI, then maybe enemy-specific AI
 			}
 			
 			if(!enemy.isAlive()) {
 				if(nightCounter < 10) {
-					CLI.writeCreatureDeath(enemy);
+					cli.writeCreatureDeath(enemy);
 					Utils.waitInMs(1500);
-					CLI.writeJourneyContinue();
+					cli.writeJourneyContinue();
 					Utils.waitInMs(1500);
 				} else {
-					CLI.writeBossDeath(enemy);
+					cli.writeBossDeath(enemy);
 					Utils.waitInMs(3000);
 				}
 			} else if(!player.isAlive()) {
-				CLI.writeCreatureDeath(player);
-				CLI.writeYouDied();
+				cli.writeCreatureDeath(player);
+				cli.writeYouDied();
 			}
 			
 			nightCounter++;
@@ -146,23 +146,23 @@ public class World {
 			nightCounter = 10;
 		
 		Utils.waitInMs(1500);
-		CLI.writeScoreOnRunEnd(player, nightCounter);
+		cli.writeScoreOnRunEnd(player, nightCounter);
 		Utils.waitInMs(1500);
-		CLI.writeAddScore();
+		cli.writeAddScore();
 		
-		if(CLI.readConsoleInput().contentEquals("y")) {
-			CLI.writeAskName();
-			String name = CLI.readConsoleInput();
+		if(cli.readConsoleInput().contentEquals("y")) {
+			cli.writeAskName();
+			String name = cli.readConsoleInput();
 			
 			if(nightCounter > 10)
 				nightCounter = 10;
-			String scoreString = CLI.createScoreStringNameNightHp(name, nightCounter, player.getCurrentHp());
-			CLI.addScoreToScoreboard(scoreString);
+			String scoreString = cli.createScoreStringNameNightHp(name, nightCounter, player.getCurrentHp());
+			cli.addScoreToScoreboard(scoreString);
 		} else {
-			CLI.writeDontSaveScore();
+			cli.writeDontSaveScore();
 		}
 		
-		CLI.enterToContinue();
+		cli.enterToContinue();
 	}
 	
 	private Creature generateRndEnemy() {
@@ -197,19 +197,5 @@ public class World {
 		default:
 			return true;
 		}
-	}
-	
-	// ### GETTERS & SETTERS
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public EntityManager getEntityManager() {
-		return entityManager;
 	}
 }

@@ -182,4 +182,12 @@ public abstract class Creature {
 	public void setyPos(int yPos) {
 		this.yPos = yPos;
 	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
 }

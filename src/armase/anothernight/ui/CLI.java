@@ -1,5 +1,6 @@
 package armase.anothernight.ui;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -8,17 +9,18 @@ import armase.anothernight.entities.creatures.Creature;
 import armase.anothernight.utils.Utils;
 
 public class CLI {
-	private static String version = "v0.42069";
+	private String version = "v0.42069";
 	// TODO : scoreboard persistence
-	private static ArrayList<String> scoreboard = new ArrayList<String>();
+	private ArrayList<String> scoreboard = new ArrayList<String>();
+	private Console console;
 	
-	private static String[] versionStampMsgs = new String[] {
+	private String[] versionStampMsgs = new String[] {
 			"~ Another Night ~ " + version + " ~ by Team ARMASE <3",
 			"~ Another Night ~ " + version + " ~ by Team ARMASE :3",
 			"~ Another Night ~ " + version + " ~ by Team ARMASE ¯\\_(ツ)_/¯",
 			"~ Another Night ~ " + version + " ~ by Team ARMASE c:"
 			};
-	private static String[] welcomeMsgs = new String[] {
+	private String[] welcomeMsgs = new String[] {
 			"                       _   _                 _   _ _       _     _   \r\n" + 
 			"     /\\               | | | |               | \\ | (_)     | |   | |  \r\n" + 
 			"    /  \\   _ __   ___ | |_| |__   ___ _ __  |  \\| |_  __ _| |__ | |_ \r\n" + 
@@ -29,7 +31,7 @@ public class CLI {
 			"            ~ Console Version ~                      |___/ " +
 			"~ " + version
 			};
-	private static String[] motds = new String[] {
+	private String[] motds = new String[] {
 			"~ Full of hidden bugs for you to find! ~",
 			"~ Now with new, more sexist warrior guilds! ~",
 			"~ Don't blame the player, blame the game! ~",
@@ -39,42 +41,46 @@ public class CLI {
 			"~ Now with random messages of the day! ~",
 			"~ Trust the system! ~"
 			};
-	private static String[] badInputMsgs = new String[] {
+	private String[] badInputMsgs = new String[] {
 			"Please choose an available option, friend!",
 			"Friend, you should really pay attention to what you try to tell me.",
 			"Ehm... yes! Wait, what?"
 			};
-	private static String[] continueMsgs = new String[] {
+	private String[] continueMsgs = new String[] {
 			"~ As your opponent falls the sun finally rises...",
 			"~ You cringe in disgust of what is left of your enemy...",
 			"~ Seems like you actually might get some hours of sleep...",
 			"~ Will you ever get into the Amazing Warrior Guild (TM) you wonder..."
 			};
-	private static String[] buffedMsgs = new String[] {
+	private String[] buffedMsgs = new String[] {
 			" has gotten stronger!",
 			" feels a rise of confidence!",
 			"'s stats were buffed!"
 			};
-	private static String[] debuffedMsgs = new String[] {
+	private String[] debuffedMsgs = new String[] {
 			" looks with eyes full of fear...",
 			" feels limp...",
 			" ponders about existence..."
 			};
-	private static String[] confusedMsgs = new String[] {
+	private String[] confusedMsgs = new String[] {
 			" is lost in confusion...",
 			" wonders how much time was won by not checking writing for spelling mistakes...",
 			" is busy admiring the world's beauty...",
 			" used SPLASH! But nothing happened!",
 			" is daydreaming..."
 			};
-	private static String[] deathMsgs = new String[] {
+	private String[] deathMsgs = new String[] {
 			" succumbed to all the hurties.",
 			" takes a last breath and falls.",
 			" has fainted!",
 			"'s life has ended."
 			};
+	
+	public CLI(Console console) {
+		this.console = console;
+	}
 
-	public static String readConsoleInput() {
+	public String readConsoleInput() {
 		System.out.print("> ");
 		Scanner scanner = new Scanner(System.in);
 		String outString = scanner.nextLine().toString();
@@ -82,21 +88,21 @@ public class CLI {
 		return outString;
 	}
 	
-	public static String enterToContinue() {
+	public String enterToContinue() {
 		System.out.println();
 		System.out.println("Press [ ENTER ] to continue!");
 		return readConsoleInput();
 	}
 	
-	public static void writeWelcomeMsg() {
+	public void writeWelcomeMsg() {
 		System.out.println(welcomeMsgs[Utils.generateRandomMinMax(0, welcomeMsgs.length - 1)]);
 	}
 	
-	public static void writeRandomMotd() {
+	public void writeRandomMotd() {
 		System.out.println(motds[Utils.generateRandomMinMax(0, motds.length - 1)]);
 	}
 
-	public static void writeMainMenu() {
+	public void writeMainMenu() {
 		System.out.println();
 		System.out.println("              _                                 \r\n" + 
 				"  /\\/\\   __ _(_)_ __     /\\/\\   ___ _ __  _   _ \r\n" + 
@@ -107,12 +113,12 @@ public class CLI {
 				"\n       [play] | [scobo] | [info] | [quit]");
 	}
 	
-	public static void writeBadInput() {
+	public void writeBadInput() {
 		System.out.println();
 		System.out.println(badInputMsgs[Utils.generateRandomMinMax(0, badInputMsgs.length - 1)]);
 	}
 	
-	public static void writeScoreboard() {
+	public void writeScoreboard() {
 		System.out.println();
 		System.out.println(
 				"                     _                 _ \r\n" + 
@@ -129,7 +135,7 @@ public class CLI {
 		}
 	}
 	
-	public static void writeGameInfo() {
+	public void writeGameInfo() {
 		System.out.println();
 		System.out.println("Another Night is a story about a girl named Anni."
 				+ "\nAnni wants to get into the Amazing Warrior Guild (TM) but they are sexist."
@@ -140,22 +146,22 @@ public class CLI {
 				+ "\n" + versionStampMsgs[Utils.generateRandomMinMax(0, versionStampMsgs.length - 1)]);
 	}
 
-	public static void writeJourneyBeginning() {
+	public void writeJourneyBeginning() {
 		System.out.println();
 		System.out.println("~ And so your journey begins...");
 	}
 	
-	public static void writeJourneyContinue() {
+	public void writeJourneyContinue() {
 		System.out.println();
 		System.out.println(continueMsgs[Utils.generateRandomMinMax(0, continueMsgs.length - 1)]);
 	}
 	
-	public static void writeFightMenu() {
+	public void writeFightMenu() {
 		System.out.println();
 		System.out.println("Do what? [ atk | bc | su | info ]");
 	}
 	
-	public static void writeFightMenuInfo() {
+	public void writeFightMenuInfo() {
 		System.out.println();
 		System.out.println("# atk - Attack | bc - Battle Cry | su - Shields Up"
 				+ "\n# Beware of spelling mistakes..."
@@ -163,7 +169,7 @@ public class CLI {
 				+ "\nYou used a turn to rethink your possibilities...");
 	}
 	
-	public static void writeNightCount(int nightCount) {
+	public void writeNightCount(int nightCount) {
 		System.out.println();
 		System.out.println(
 				" _  _  ____  ___  _   _  ____ \r\n" + 
@@ -174,69 +180,69 @@ public class CLI {
 				"              " + nightCount);
 	}
 
-	public static void writeCreatureAppearance(Creature creature) {
+	public void writeCreatureAppearance(Creature creature) {
 		System.out.println();
 		System.out.println("A " + creature.getName() + " appeared!");
 	}
 
-	public static void writeCreatureStatus(Creature creature) {
+	public void writeCreatureStatus(Creature creature) {
 		System.out.println();
 		System.out.println("### STATUS: " + creature.getName()
 				+ "\nHP: " + creature.getCurrentHp() + " / " + creature.getMaxHp()
 				+ " - Pow: " + creature.getPower() + " - Def: " + creature.getDefense());
 	}
 	
-	public static void writeEnemyGotFirstMove(Creature enemy) {
+	public void writeEnemyGotFirstMove(Creature enemy) {
 		System.out.println();
 		System.out.println(enemy.getName() + " tricks you and gets first turn!");
 	}
 
-	public static void writeCreatureAttacksCreature(Creature attacker, Creature receiver) {
+	public void writeCreatureAttacksCreature(Creature attacker, Creature receiver) {
 		System.out.println();
 		System.out.println(attacker.getName() + " attacks " + receiver.getName() + "!");
 	}
 	
-	public static void writeCreatureAttacksCreature(Creature attacker, Creature receiver, int dmg) {
+	public void writeCreatureAttacksCreature(Creature attacker, Creature receiver, int dmg) {
 		System.out.println();
 		System.out.println(attacker.getName() + " deals " + dmg + " damage to " + receiver.getName() + "!");
 	}
 
-	public static void writeCreatureReceivesDamage(Creature creature, int dmg) {
+	public void writeCreatureReceivesDamage(Creature creature, int dmg) {
 		System.out.println();
 		System.out.println(creature.getName() + " receives " + dmg + " damage!");
 	}
 	
-	public static void writeCreatureBattleCry(Creature creature) {
+	public void writeCreatureBattleCry(Creature creature) {
 		System.out.println();
 		System.out.println(creature.getName() + " screams ferociously!");
 	}
 	
-	public static void writeCreatureShieldsUp(Creature creature) {
+	public void writeCreatureShieldsUp(Creature creature) {
 		System.out.println();
 		System.out.println(creature.getName() + " prepares for the enemy's attack...");
 	}
 
-	public static void writeCreatureBuffed(Creature creature) {
+	public void writeCreatureBuffed(Creature creature) {
 		System.out.println();
 		System.out.println(creature.getName() + buffedMsgs[Utils.generateRandomMinMax(0, buffedMsgs.length - 1)]);
 	}
 
-	public static void writeCreatureDebuffed(Creature creature) {
+	public void writeCreatureDebuffed(Creature creature) {
 		System.out.println();
 		System.out.println(creature.getName() + debuffedMsgs[Utils.generateRandomMinMax(0, debuffedMsgs.length - 1)]);
 	}
 	
-	public static void writeCreatureConfused(Creature creature) {
+	public void writeCreatureConfused(Creature creature) {
 		System.out.println();
 		System.out.println(creature.getName() + confusedMsgs[Utils.generateRandomMinMax(0, confusedMsgs.length - 1)]);
 	}
 
-	public static void writeCreatureDeath(Creature creature) {
+	public void writeCreatureDeath(Creature creature) {
 		System.out.println();
 		System.out.println(creature.getName() + deathMsgs[Utils.generateRandomMinMax(0, deathMsgs.length - 1)]);
 	}
 	
-	public static void writeBossDeath(Creature boss) {
+	public void writeBossDeath(Creature boss) {
 		System.out.println();
 		System.out.println(
 				"Finally, " + boss.getName() + "'s body slowly descends to the ground."
@@ -250,7 +256,7 @@ public class CLI {
 				+ "\n                     and make your way to the Amazing Warrior Guild (TM)...");
 	}
 	
-	public static void writeYouDied() {
+	public void writeYouDied() {
 		System.out.println();
 		System.out.println(
 				"                  (            (     \r\n" + 
@@ -264,7 +270,7 @@ public class CLI {
 				"");
 	}
 	
-	public static void writeScoreOnRunEnd(Creature player, int nightReached) {
+	public void writeScoreOnRunEnd(Creature player, int nightReached) {
 		System.out.println();
 		if(nightReached <= 3) {
 			System.out.println("Haha, you see?"
@@ -293,18 +299,18 @@ public class CLI {
 			System.out.println("Something broke, your score was lost to the Bad Byte Gang!");
 	}
 
-	public static void writeExitMsg() {
+	public void writeExitMsg() {
 		System.out.println();
 		System.out.println("This is goodbye I guess."
 				+ "\nFarewell, my friend...");
 	}
 	
-	public static void writeAddScore() {
+	public void writeAddScore() {
 		System.out.println();
 		System.out.println("Want to add your score to the scoreboard? [ y | n ]");
 	}
 	
-	public static String createScoreStringNameNightHp(String name, int night, int hpLeft) {
+	public String createScoreStringNameNightHp(String name, int night, int hpLeft) {
 		String scoreEntry = "~ " + Utils.getDateTimeStamp() + " - " + name + " reached night " + night;
 		if(night >= 10 && hpLeft <= 0)
 			scoreEntry += " but died...";
@@ -313,17 +319,17 @@ public class CLI {
 		return scoreEntry;
 	}
 	
-	public static void writeDontSaveScore() {
+	public void writeDontSaveScore() {
 		System.out.println();
 		System.out.println("Don't worry, I'll take this secret to my grave!");
 	}
 	
-	public static void writeAskName() {
+	public void writeAskName() {
 		System.out.println();
 		System.out.println("Great decision! What's your name, honey?");
 	}
 	
-	public static void addScoreToScoreboard(String scoreString) {
+	public void addScoreToScoreboard(String scoreString) {
 		scoreboard.add(scoreString);
 		System.out.println();
 		System.out.println("Score was added to scoreboard!");
@@ -331,7 +337,7 @@ public class CLI {
 
 	// ### GETTERS & SETTERS
 	
-	public static ArrayList<String> getScoreboard() {
+	public ArrayList<String> getScoreboard() {
 		return scoreboard;
 	}
 }

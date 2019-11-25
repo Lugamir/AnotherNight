@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import armase.anothernight.Handler;
 import armase.anothernight.entities.EntityManager;
 import armase.anothernight.entities.creatures.Creature;
-import armase.anothernight.entities.creatures.Player;
 import armase.anothernight.entities.creatures.enemies.DangerDoggo;
 import armase.anothernight.entities.creatures.enemies.HiddenBug;
 import armase.anothernight.entities.creatures.enemies.Mushdrool;
@@ -49,7 +48,7 @@ public class DayState extends State {
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
 		
-		handler.getBackdropManager().setCurrentBackdropImage(Assets.campSceneBackdrop);
+		handler.getBackdropManager().setCurrentBackdropImage(Assets.nightBackdrop);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

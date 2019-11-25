@@ -12,8 +12,9 @@ public class Assets {
 	public static BufferedImage[] placeholders;
 	
 	// Backdrops // TODO : Animate
-	public static BufferedImage mainMenuBackdrop, prefaceBackdrop, campSceneBackdrop,
-								fightSceneBackdrop, gameOverBackdrop, winBackdrop;
+	public static BufferedImage prefaceBackdrop, scoreboardBackdrop;
+	public static BufferedImage gameOverBackdrop, winBackdrop;
+	public static BufferedImage[] mainMenuBackdrop, nightBackdrop;
 
 	// Menu Elements
 	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok;
@@ -43,13 +44,15 @@ public class Assets {
 	public static void init() {
 
 		// Sheets
+		SpriteSheet mainMenuSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mainmenu.png"));
+		SpriteSheet buttonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/buttons.png"));
+		SpriteSheet nightSheet = new SpriteSheet(ImageLoader.loadImage("/textures/night.png"));
 		SpriteSheet playerSheet = new SpriteSheet(ImageLoader.loadImage("/textures/player.png"));
 		SpriteSheet mushdroolSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mushdrool.png"));
-		SpriteSheet doggoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/dundoggo.png"));
+		SpriteSheet doggoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/borko.png"));
 		SpriteSheet skeletonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/skeleton.png"));
-		SpriteSheet missingSheet = new SpriteSheet(ImageLoader.loadImage("/textures/img_missing_16.png"));
-		SpriteSheet buttonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/buttons.png"));
 		SpriteSheet abilitySheet = new SpriteSheet(ImageLoader.loadImage("/textures/ability_buttons.png"));
+		SpriteSheet missingSheet = new SpriteSheet(ImageLoader.loadImage("/textures/img_missing_16.png"));
 		SpriteSheet secretSheet = new SpriteSheet(ImageLoader.loadImage("/textures/secretbutton.png"));
 
 		// Placeholder
@@ -59,12 +62,16 @@ public class Assets {
 		placeholders[1] = missingSheet.crop(width * 1, 0, width, height);
 		
 		// Backdrops
-		mainMenuBackdrop = ImageLoader.loadImage("/textures/forest.png");
+		mainMenuBackdrop = new BufferedImage[2];
+		for (int i = 0; i < mainMenuBackdrop.length; i++)
+			mainMenuBackdrop[i] = mainMenuSheet.crop(800 * i, 0, 800, 600);
 		prefaceBackdrop = ImageLoader.loadImage("/textures/preface.png");
-		campSceneBackdrop = ImageLoader.loadImage("/textures/nightsky.png");
-//		fightSceneBackdrop[0] = ImageLoader.loadImage("/textures/forest.png");
+		nightBackdrop = new BufferedImage[4];
+		for (int i = 0; i < nightBackdrop.length; i++)
+			nightBackdrop[i] = nightSheet.crop(800 * i, 0, 800, 600);
 		gameOverBackdrop = ImageLoader.loadImage("/textures/gameover.png");
 		winBackdrop = ImageLoader.loadImage("/textures/youwon.png");
+		scoreboardBackdrop = ImageLoader.loadImage("/textures/scoreboard.png");
 		
 		// Button Sheet Crops
 		btn_start = new BufferedImage[2];
