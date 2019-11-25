@@ -9,12 +9,16 @@ public class Assets {
 
 	// Placeholder
 	public static BufferedImage placeholder;
+	public static BufferedImage[] placeholders;
 	
 	// Backdrops // TODO : Animate
-	public static BufferedImage mainMenuBackdrop, campSceneBackdrop, fightSceneBackdrop;
+	public static BufferedImage mainMenuBackdrop, prefaceBackdrop, campSceneBackdrop,
+								fightSceneBackdrop, gameOverBackdrop, winBackdrop;
 
 	// Menu Elements
-	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit;
+	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok;
+	public static BufferedImage[] btn_attack, btn_battleCry, btn_shieldsUp;
+	public static BufferedImage[] btn_secret;
 	
 	// Creatures
 	public static BufferedImage player;
@@ -39,43 +43,70 @@ public class Assets {
 	public static void init() {
 
 		// Sheets
-		SpriteSheet missingSheet = new SpriteSheet(ImageLoader.loadImage("/textures/img_missing_16.png"));
-		SpriteSheet buttonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/buttons.png"));
-		SpriteSheet playerSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mushdrool.png"));
+		SpriteSheet playerSheet = new SpriteSheet(ImageLoader.loadImage("/textures/player.png"));
 		SpriteSheet mushdroolSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mushdrool.png"));
 		SpriteSheet doggoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/dundoggo.png"));
 		SpriteSheet skeletonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/skeleton.png"));
+		SpriteSheet missingSheet = new SpriteSheet(ImageLoader.loadImage("/textures/img_missing_16.png"));
+		SpriteSheet buttonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/buttons.png"));
+		SpriteSheet abilitySheet = new SpriteSheet(ImageLoader.loadImage("/textures/ability_buttons.png"));
+		SpriteSheet secretSheet = new SpriteSheet(ImageLoader.loadImage("/textures/secretbutton.png"));
 
 		// Placeholder
 		placeholder = ImageLoader.loadImage("/textures/placeholder.jpg");
+		placeholders = new BufferedImage[2];
+		placeholders[0] = missingSheet.crop(width * 0, 0, width, height);
+		placeholders[1] = missingSheet.crop(width * 1, 0, width, height);
 		
 		// Backdrops
 		mainMenuBackdrop = ImageLoader.loadImage("/textures/forest.png");
+		prefaceBackdrop = ImageLoader.loadImage("/textures/preface.png");
 		campSceneBackdrop = ImageLoader.loadImage("/textures/nightsky.png");
 //		fightSceneBackdrop[0] = ImageLoader.loadImage("/textures/forest.png");
+		gameOverBackdrop = ImageLoader.loadImage("/textures/gameover.png");
+		winBackdrop = ImageLoader.loadImage("/textures/youwon.png");
 		
 		// Button Sheet Crops
 		btn_start = new BufferedImage[2];
 		btn_scoreboard = new BufferedImage[2];
 		btn_quit = new BufferedImage[2];
+		btn_ok = new BufferedImage[2];
 		btn_start[0] =		buttonSheet.crop(0, 0, width * 4, height * 2);
 		btn_start[1] =		buttonSheet.crop(width * 4, 0, width * 4, height * 2);
 		btn_scoreboard[0] =	buttonSheet.crop(0, height * 2, width * 4, height * 2);
 		btn_scoreboard[1] =	buttonSheet.crop(width * 4, height * 2, width * 4, height * 2);
 		btn_quit[0] =		buttonSheet.crop(0, height * 4, width * 4, height * 2);
 		btn_quit[1] =		buttonSheet.crop(width * 4, height * 4, width * 4, height * 2);
+		btn_ok[0] =			buttonSheet.crop(0, height * 6, width * 4, height * 2);
+		btn_ok[1] =			buttonSheet.crop(width * 4, height * 6, width * 4, height * 2);
+		
+		// Ability Sheet Crops
+		btn_attack = new BufferedImage[2];
+		btn_battleCry = new BufferedImage[2];
+		btn_shieldsUp = new BufferedImage[2];
+		btn_attack[0] =		abilitySheet.crop(0, 0, width * 4, height * 2);
+		btn_attack[1] =		abilitySheet.crop(width * 4, 0, width * 4, height * 2);
+		btn_battleCry[0] =	abilitySheet.crop(0, height * 2, width * 4, height * 2);
+		btn_battleCry[1] =	abilitySheet.crop(width * 4, height * 2, width * 4, height * 2);
+		btn_shieldsUp[0] =	abilitySheet.crop(0, height * 4, width * 4, height * 2);
+		btn_shieldsUp[1] =	abilitySheet.crop(width * 4, height * 4, width * 4, height * 2);
+		
+		// Secret Button
+		btn_secret = new BufferedImage[2];
+		btn_secret[0] = secretSheet.crop(0, 0, width * 4, height * 2);
+		btn_secret[1] = secretSheet.crop(width * 4, 0, width * 4, height * 2);
 		
 		// Player Sheet Crops
 		player_idle = new BufferedImage[4];
 		player_attack = new BufferedImage[4];
 		player_death = new BufferedImage[4];
 		for (int i = 0; i < 4; i++)
-			player_idle[i] = missingSheet.crop(width * i, 0, width, height);
+			player_idle[i] = playerSheet.crop(width * i, 0, width, height);
 		for (int i = 0; i < 4; i++)
-			player_attack[i] = missingSheet.crop(width * i, 0, width, height);
+			player_attack[i] = playerSheet.crop(width * i, 0, width, height);
 		for (int i = 0; i < 4; i++)
-			player_death[i] = missingSheet.crop(width * i, 0, width, height);
-		player = missingSheet.crop(0, 0, width, height);
+			player_death[i] = playerSheet.crop(width * i, 0, width, height);
+		player = playerSheet.crop(0, 0, width, height);
 		
 		// Mushdrool Sheet Crops
 		mushdrool_idle = new BufferedImage[4];

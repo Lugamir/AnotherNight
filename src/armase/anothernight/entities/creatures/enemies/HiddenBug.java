@@ -13,7 +13,9 @@ public class HiddenBug extends Creature {
 		
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
-		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
+		animIdle = new Animation(animSpeed, Assets.placeholders);
+		animAttack = new Animation(animSpeed, Assets.placeholders);
+		animDeath = new Animation(animSpeed, Assets.placeholders);
 	}
 	
 	public HiddenBug(Handler handler) {
@@ -22,6 +24,8 @@ public class HiddenBug extends Creature {
 		
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
-		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
+		animIdle = new Animation(animSpeed, Assets.placeholders);
+		animAttack = new Animation(animSpeed, Assets.placeholders);
+		animDeath = new Animation(animSpeed, Assets.placeholders);
 	}
 }

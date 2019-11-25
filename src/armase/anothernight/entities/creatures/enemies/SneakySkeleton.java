@@ -14,6 +14,8 @@ public class SneakySkeleton extends Creature {
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.skeleton_idle);
+		animAttack = new Animation(animSpeed, Assets.skeleton_attack);
+		animDeath = new Animation(animSpeed, Assets.skeleton_death);
 	}
 	
 	public SneakySkeleton(Handler handler) {
@@ -23,5 +25,7 @@ public class SneakySkeleton extends Creature {
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.skeleton_idle);
+		animAttack = new Animation(animSpeed, Assets.skeleton_attack);
+		animDeath = new Animation(animSpeed, Assets.skeleton_death);
 	}
 }

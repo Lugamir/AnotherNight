@@ -51,8 +51,8 @@ public abstract class Creature {
 	public void tick() {
 		// Tick all animations here!
 		animIdle.tick();
-//		animAttack.tick();
-//		animDeath.tick();
+		animAttack.tick();
+		animDeath.tick();
 	}
 	
 	public void render(Graphics g) {

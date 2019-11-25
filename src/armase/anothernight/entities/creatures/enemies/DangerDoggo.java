@@ -14,6 +14,8 @@ public class DangerDoggo extends Creature {
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.doggo_idle);
+		animAttack = new Animation(animSpeed, Assets.doggo_attack);
+		animDeath = new Animation(animSpeed, Assets.doggo_death);
 	}
 	
 	public DangerDoggo(Handler handler) {
@@ -22,5 +24,7 @@ public class DangerDoggo extends Creature {
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.doggo_idle);
+		animAttack = new Animation(animSpeed, Assets.doggo_attack);
+		animDeath = new Animation(animSpeed, Assets.doggo_death);
 	}
 }

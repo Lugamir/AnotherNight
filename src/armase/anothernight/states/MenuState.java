@@ -3,6 +3,7 @@ package armase.anothernight.states;
 import java.awt.Graphics;
 
 import armase.anothernight.Handler;
+import armase.anothernight.entities.creatures.Vegeta;
 import armase.anothernight.gfx.Assets;
 import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
@@ -25,8 +26,7 @@ public class MenuState extends State {
 				@Override
 				public void onClick() {
 					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
-					handler.getBackdropManager().setCurrentBackdropImage(Assets.campSceneBackdrop);
-					State.setState(handler.getGame().gameState);
+					State.setState(new PrefaceState(handler));
 				}
 			}));
 
@@ -44,6 +44,15 @@ public class MenuState extends State {
 				public void onClick() {
 					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
 					System.exit(0);
+				}
+			}));
+		
+		uiManager.addObject(new UIImageButton(handler.getWidth() - 128,0 , 128, 64, Assets.btn_secret,
+			new ClickListener() {
+				@Override
+				public void onClick() {
+					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
+					State.setState(new DayState(handler, new Vegeta(handler), 1)); // TODO : remove testline
 				}
 			}));
 	}

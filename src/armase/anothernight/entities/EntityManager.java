@@ -28,10 +28,11 @@ public class EntityManager {
 	}
 	
 	public void tick() {
-		for(int i = 0; i < creatures.size(); i++) {
-			Creature e = creatures.get(i);
-			e.tick();
-		}
+		if(creatures.size() > 0)
+			for(int i = 0; i < creatures.size(); i++) {
+				Creature e = creatures.get(i);
+				e.tick();
+			}
 	}
 	
 	public void render(Graphics g) {

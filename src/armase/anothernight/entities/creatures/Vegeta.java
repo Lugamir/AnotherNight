@@ -4,10 +4,10 @@ import armase.anothernight.Handler;
 import armase.anothernight.gfx.Animation;
 import armase.anothernight.gfx.Assets;
 
-public class Player extends Creature {
+public class Vegeta extends Creature {
 
-	public Player() {
-		super("Anni", 50, 50, 10, 10);
+	public Vegeta(String name, int currentHp, int maxHp, int power, int defense) {
+		super("Vegeta", 9001, 9001, 9001, 9001);
 		isEnemy = false;
 		
 		// Animations - set anim speed in ms here
@@ -17,8 +17,8 @@ public class Player extends Creature {
 		animDeath = new Animation(animSpeed, Assets.player_death);
 	}
 	
-	public Player(Handler handler) {
-		super("Anni", 50, 50, 10, 10);
+	public Vegeta(Handler handler) {
+		super("Vegeta", 9001, 9001, 9001, 9001);
 		isEnemy = false;
 		
 		// Animations - set anim speed in ms here
@@ -27,4 +27,5 @@ public class Player extends Creature {
 		animAttack = new Animation(animSpeed, Assets.player_attack);
 		animDeath = new Animation(animSpeed, Assets.player_death);
 	}
+
 }

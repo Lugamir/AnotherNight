@@ -14,6 +14,8 @@ public class Mushdrool extends Creature {
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
+		animAttack = new Animation(animSpeed, Assets.mushdrool_attack);
+		animDeath = new Animation(animSpeed, Assets.mushdrool_death);
 	}
 	
 	public Mushdrool(Handler handler) {
@@ -23,5 +25,7 @@ public class Mushdrool extends Creature {
 		// Animations - set anim speed in ms here
 		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
+		animAttack = new Animation(animSpeed, Assets.mushdrool_attack);
+		animDeath = new Animation(animSpeed, Assets.mushdrool_death);
 	}
 }

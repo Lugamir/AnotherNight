@@ -17,6 +17,7 @@ import armase.anothernight.input.KeyManager;
 import armase.anothernight.input.MouseManager;
 import armase.anothernight.states.GameState;
 import armase.anothernight.states.MenuState;
+import armase.anothernight.states.PrefaceState;
 import armase.anothernight.states.State;
 import armase.anothernight.ui.CLI;
 import armase.anothernight.utils.Utils;
@@ -33,8 +34,8 @@ public class Game implements Runnable {
 	private Graphics g;
 	
 	// States - if possible revert to private
-	public State gameState;
 	public State menuState;
+	public State gameState; // TODO : remove after moving content
 	
 	// Input
 	private KeyManager keyManager;
@@ -74,8 +75,9 @@ public class Game implements Runnable {
 
 		backdropManager = new BackdropManager(handler);
 		
-		gameState = new GameState(handler);
 		menuState = new MenuState(handler);
+		gameState = new GameState(handler); // TODO : remove after moving content
+		
 		State.setState(menuState); // state on startup
 	}
 	
