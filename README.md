@@ -13,7 +13,7 @@
 
 ## Notes
 
-- [Git will **not** push empty packages](https://stackoverflow.com/questions/16675784/git-didnt-push-empty-folders/16675971) so I filled em up with placeholders from my other project
+- FYI [Git will **not** push empty packages](https://stackoverflow.com/questions/16675784/git-didnt-push-empty-folders/16675971)
 - [Markdown Syntax](https://www.markdownguide.org/basic-syntax/) for editing this README.md file
 
 - Text me if you have feedback and / or rage-induced insults for me *~ by Tem*
