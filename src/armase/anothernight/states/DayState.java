@@ -11,6 +11,7 @@ import armase.anothernight.entities.creatures.enemies.Mushdrool;
 import armase.anothernight.entities.creatures.enemies.SneakySkeleton;
 import armase.anothernight.gfx.Assets;
 import armase.anothernight.ui.ClickListener;
+import armase.anothernight.ui.NightCounter;
 import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
 import armase.anothernight.utils.Utils;
@@ -23,12 +24,14 @@ public class DayState extends State {
 	private int playerPosX, playerPosY;
 	private int enemyPosX, enemyPosY;
 	private final int enemyTypes = 3;
-	private int dayCount;
+	private int dayCount, msBetweenTurns;
 
 	public DayState(Handler handler, Creature player, int dayCount) {
 		super(handler);
 		this.player = player;
 		this.dayCount = dayCount;
+		
+		msBetweenTurns = 1200;
 
 		playerPosX = handler.getWidth() / 3 - 240;
 		playerPosY = handler.getHeight() / 10 * 5;
@@ -59,7 +62,9 @@ public class DayState extends State {
 					@Override
 					public void onClick() {
 						playerAttack();
-						enemyTurn();
+						if (enemy.isAlive()) {
+							enemyTurn();
+						}
 						changeStateMaybe();
 					}
 				}));
@@ -70,7 +75,9 @@ public class DayState extends State {
 					@Override
 					public void onClick() {
 						playerBattleCry();
-						enemyTurn();
+						if (enemy.isAlive()) {
+							enemyTurn();
+						}
 						changeStateMaybe();
 					}
 				}));
@@ -81,10 +88,24 @@ public class DayState extends State {
 					@Override
 					public void onClick() {
 						playerShieldsUp();
-						enemyTurn();
+						if (enemy.isAlive()) {
+							enemyTurn();
+						}
 						changeStateMaybe();
 					}
 				}));
+		
+		uiManager.addObject(new UIImageButton(handler.getWidth() - buttonWidth - buttonSpacing, buttonSpacing, buttonWidth, buttonHeight, Assets.btn_secret,
+				new ClickListener() {
+					@Override
+					public void onClick() {
+						handler.getMouseManager().setUIManager(null); // buttons disappear on state change
+						player.kill();
+						changeStateMaybe();
+					}
+				}));
+		
+		uiManager.addObject(new NightCounter(handler, dayCount));
 	}
 
 	@Override
@@ -135,15 +156,15 @@ public class DayState extends State {
 	private void changeStateMaybe() { // TODO : rename plox
 		if (!player.isAlive()) {
 			handler.getMouseManager().setUIManager(null);
-			System.out.println("NIGHT : " + dayCount); // TODO : remove testline
+			System.out.println("NIGHTs survived : " + dayCount); // TODO : remove testline
 			State.setState(new GameOverState(handler, player, dayCount));
 		} else if (!enemy.isAlive() && dayCount < 10) {
 			handler.getMouseManager().setUIManager(null);
-			System.out.println("NIGHT : " + dayCount); // TODO : remove testline
+			System.out.println("NIGHTs survived : " + dayCount); // TODO : remove testline
 			State.setState(new DayState(handler, player, ++dayCount));
-		} else if (!enemy.isAlive() && dayCount >= 10) {
+		} else if (player.isAlive() && !enemy.isAlive() && dayCount >= 10) {
 			handler.getMouseManager().setUIManager(null);
-			System.out.println("NIGHT : " + dayCount); // TODO : remove testline
+			System.out.println("NIGHTs survived : " + dayCount); // TODO : remove testline
 			State.setState(new WinState(handler, player));
 		}
 	}

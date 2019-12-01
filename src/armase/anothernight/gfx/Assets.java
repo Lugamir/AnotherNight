@@ -16,15 +16,18 @@ public class Assets {
 	public static BufferedImage gameOverBackdrop, winBackdrop;
 	public static BufferedImage[] mainMenuBackdrop, nightBackdrop;
 
-	// Menu Elements
+	// UI Elements
 	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok;
 	public static BufferedImage[] btn_attack, btn_battleCry, btn_shieldsUp;
 	public static BufferedImage[] btn_secret;
+	public static BufferedImage[] night_word, numbers;
 	
 	// Creatures
 	public static BufferedImage player;
 	public static BufferedImage[] player_idle;
 	public static BufferedImage[] player_attack;
+	public static BufferedImage[] player_battleCry;
+	public static BufferedImage[] player_shieldsUp;
 	public static BufferedImage[] player_death;
 	public static BufferedImage mushdrool;
 	public static BufferedImage[] mushdrool_idle;
@@ -52,6 +55,8 @@ public class Assets {
 		SpriteSheet doggoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/borko.png"));
 		SpriteSheet skeletonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/skeleton.png"));
 		SpriteSheet abilitySheet = new SpriteSheet(ImageLoader.loadImage("/textures/ability_buttons.png"));
+		SpriteSheet nightWordSheet = new SpriteSheet(ImageLoader.loadImage("/textures/night_word.png"));
+		SpriteSheet numbersSheet = new SpriteSheet(ImageLoader.loadImage("/textures/one_to_ten.png"));
 		SpriteSheet missingSheet = new SpriteSheet(ImageLoader.loadImage("/textures/img_missing_16.png"));
 		SpriteSheet secretSheet = new SpriteSheet(ImageLoader.loadImage("/textures/secretbutton.png"));
 
@@ -87,6 +92,14 @@ public class Assets {
 		btn_ok[0] =			buttonSheet.crop(0, height * 6, width * 4, height * 2);
 		btn_ok[1] =			buttonSheet.crop(width * 4, height * 6, width * 4, height * 2);
 		
+		// Nightcounter
+		night_word = new BufferedImage[4];
+		numbers = new BufferedImage[10];
+		for (int i = 0; i < night_word.length; i++)
+			night_word[i] = nightWordSheet.crop(width * 4 * i, 0, width * 4, height * 2);
+		for (int i = 0; i < numbers.length; i++)
+			numbers[i] = numbersSheet.crop(width * i, 0, width, height);
+		
 		// Ability Sheet Crops
 		btn_attack = new BufferedImage[2];
 		btn_battleCry = new BufferedImage[2];
@@ -106,13 +119,19 @@ public class Assets {
 		// Player Sheet Crops
 		player_idle = new BufferedImage[4];
 		player_attack = new BufferedImage[4];
+		player_battleCry = new BufferedImage[4];
+		player_shieldsUp = new BufferedImage[4];
 		player_death = new BufferedImage[4];
 		for (int i = 0; i < 4; i++)
 			player_idle[i] = playerSheet.crop(width * i, 0, width, height);
 		for (int i = 0; i < 4; i++)
-			player_attack[i] = playerSheet.crop(width * i, 0, width, height);
+			player_attack[i] = playerSheet.crop(width * i, height, width, height);
 		for (int i = 0; i < 4; i++)
-			player_death[i] = playerSheet.crop(width * i, 0, width, height);
+			player_battleCry[i] = playerSheet.crop(width * i, height * 2, width, height);
+		for (int i = 0; i < 4; i++)
+			player_shieldsUp[i] = playerSheet.crop(width * i, height * 3, width, height);
+		for (int i = 0; i < 4; i++)
+			player_death[i] = playerSheet.crop(width * i, height * 4, width, height);
 		player = playerSheet.crop(0, 0, width, height);
 		
 		// Mushdrool Sheet Crops
@@ -122,10 +141,10 @@ public class Assets {
 		for (int i = 0; i < 4; i++)
 			mushdrool_idle[i] = mushdroolSheet.crop(width * i, 0, width, height);
 		for (int i = 0; i < 4; i++)
-			mushdrool_attack[i] = missingSheet.crop(width * i, 0, width, height);
+			mushdrool_attack[i] = mushdroolSheet.crop(width * i, height, width, height);
 		for (int i = 0; i < 4; i++)
-			mushdrool_death[i] = missingSheet.crop(width * i, 0, width, height);
-		mushdrool = missingSheet.crop(0, 0, width, height);
+			mushdrool_death[i] = mushdroolSheet.crop(width * i, height * 2, width, height);
+		mushdrool = mushdroolSheet.crop(0, 0, width, height);
 		
 		// Danger Doggo Sheet Crops
 		doggo_idle = new BufferedImage[4];
@@ -134,10 +153,10 @@ public class Assets {
 		for (int i = 0; i < 4; i++)
 			doggo_idle[i] = doggoSheet.crop(width * i, 0, width, height);
 		for (int i = 0; i < 4; i++)
-			doggo_attack[i] = missingSheet.crop(width * i, 0, width, height);
+			doggo_attack[i] = doggoSheet.crop(width * i, height, width, height);
 		for (int i = 0; i < 4; i++)
-			doggo_death[i] = missingSheet.crop(width * i, 0, width, height);
-		doggo = missingSheet.crop(0, 0, width, height);
+			doggo_death[i] = doggoSheet.crop(width * i, height * 2, width, height);
+		doggo = doggoSheet.crop(0, 0, width, height);
 		
 		// Sneaky Skeleton Sheet Crops
 		skeleton_idle = new BufferedImage[4];
@@ -146,21 +165,9 @@ public class Assets {
 		for (int i = 0; i < 4; i++)
 			skeleton_idle[i] = skeletonSheet.crop(width * i, 0, width, height);
 		for (int i = 0; i < 4; i++)
-			skeleton_attack[i] = missingSheet.crop(width * i, 0, width, height);
+			skeleton_attack[i] = skeletonSheet.crop(width * i, height, width, height);
 		for (int i = 0; i < 4; i++)
-			skeleton_death[i] = missingSheet.crop(width * i, 0, width, height);
-		skeleton = missingSheet.crop(0, 0, width, height);
-
-		/* Reference
-		// Sheets
-		SpriteSheet tileSheet = new SpriteSheet(ImageLoader.loadImage("/textures/tiles.png"));
-		SpriteSheet blueGuySheet = new SpriteSheet(ImageLoader.loadImage("/textures/blueguy.png"));
-		
-		// Tile Sheet Crops (static)
-		dirt = tileSheet.crop(width * 0, 0, width, height);
-		grass = tileSheet.crop(width * 1, 0, width, height);
-		stone = tileSheet.crop(width * 2, 0, width, height);
-
-		*/
+			skeleton_death[i] = skeletonSheet.crop(width * i, height * 2, width, height);
+		skeleton = skeletonSheet.crop(0, 0, width, height);
 	}
 }

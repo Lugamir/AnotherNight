@@ -10,21 +10,23 @@ public class Player extends Creature {
 		super("Anni", 50, 50, 10, 10);
 		isEnemy = false;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.player_idle);
 		animAttack = new Animation(animSpeed, Assets.player_attack);
+		animBattleCry = new Animation(animSpeed, Assets.player_battleCry);
+		animShieldsUp = new Animation(animSpeed, Assets.player_shieldsUp);
 		animDeath = new Animation(animSpeed, Assets.player_death);
+		currentAnim = animIdle;
 	}
 	
 	public Player(Handler handler) {
-		super("Anni", 50, 50, 10, 10);
+		super("Anni", 50, 50, 10, 10, handler);
 		isEnemy = false;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.player_idle);
 		animAttack = new Animation(animSpeed, Assets.player_attack);
+		animBattleCry = new Animation(animSpeed, Assets.player_battleCry);
+		animShieldsUp = new Animation(animSpeed, Assets.player_shieldsUp);
 		animDeath = new Animation(animSpeed, Assets.player_death);
+		currentAnim = animIdle;
 	}
 }

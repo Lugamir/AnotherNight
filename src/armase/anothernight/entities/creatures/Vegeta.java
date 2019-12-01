@@ -6,26 +6,28 @@ import armase.anothernight.gfx.Assets;
 
 public class Vegeta extends Creature {
 
-	public Vegeta(String name, int currentHp, int maxHp, int power, int defense) {
+	public Vegeta() {
 		super("Vegeta", 9001, 9001, 9001, 9001);
 		isEnemy = false;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.player_idle);
 		animAttack = new Animation(animSpeed, Assets.player_attack);
+		animBattleCry = new Animation(animSpeed, Assets.player_battleCry);
+		animShieldsUp = new Animation(animSpeed, Assets.player_shieldsUp);
 		animDeath = new Animation(animSpeed, Assets.player_death);
+		currentAnim = animIdle;
 	}
 	
 	public Vegeta(Handler handler) {
-		super("Vegeta", 9001, 9001, 9001, 9001);
+		super("Vegeta", 9001, 9001, 9001, 9001, handler);
 		isEnemy = false;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.player_idle);
 		animAttack = new Animation(animSpeed, Assets.player_attack);
+		animBattleCry = new Animation(animSpeed, Assets.player_battleCry);
+		animShieldsUp = new Animation(animSpeed, Assets.player_shieldsUp);
 		animDeath = new Animation(animSpeed, Assets.player_death);
+		currentAnim = animIdle;
 	}
 
 }

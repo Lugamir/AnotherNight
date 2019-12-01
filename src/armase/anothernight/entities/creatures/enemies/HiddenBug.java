@@ -11,21 +11,19 @@ public class HiddenBug extends Creature {
 		super("Hidden Bug", 1, 1, 1, 1);
 		isEnemy = true;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.placeholders);
 		animAttack = new Animation(animSpeed, Assets.placeholders);
 		animDeath = new Animation(animSpeed, Assets.placeholders);
+		currentAnim = animIdle;
 	}
 	
 	public HiddenBug(Handler handler) {
 		super("Hidden Bug", 1, 1, 1, 1, handler);
 		isEnemy = true;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.placeholders);
 		animAttack = new Animation(animSpeed, Assets.placeholders);
 		animDeath = new Animation(animSpeed, Assets.placeholders);
+		currentAnim = animIdle;
 	}
 }

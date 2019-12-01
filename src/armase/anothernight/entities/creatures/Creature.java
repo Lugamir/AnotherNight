@@ -5,25 +5,24 @@ import java.awt.image.BufferedImage;
 
 import armase.anothernight.Handler;
 import armase.anothernight.gfx.Animation;
+import armase.anothernight.ui.Healthbar;
+import armase.anothernight.utils.Utils;
 
 public abstract class Creature {
 	
 	protected Handler handler;
 	protected boolean isEnemy;
+	protected boolean needsAnimChange = false;
+	protected int msBetweenTurns = 1200;
 
 	// Animations
-	protected Animation animIdle, animAttack, animDeath;
+	protected Animation currentAnim, animIdle, animAttack, animBattleCry, animShieldsUp, animDeath;
+	protected int animSpeed = 300;
 	
-	/*
-	# damagedAnim: Animation
-	# buffAnim: Animation
-	# debuffAnim: Animation
-	*/
-	
-	// Position
+	// Position // TODO : size responsiveness
 	protected int xPos = 80, yPos = 400;
 	
-	// Size
+	// Size // TODO : size responsiveness
 	protected int width = 160, height = 160;
 	
 	// Stats
@@ -31,12 +30,20 @@ public abstract class Creature {
 	protected int currentHp, maxHp;
 	protected int power, defense;
 	
+	// Healthbar
+	protected Healthbar hpBar;
+	protected boolean hpVisible;
+	
 	public Creature(String name, int currentHp, int maxHp, int power, int defense) {
 		this.name = name;
 		this.currentHp = currentHp;
 		this.maxHp = maxHp;
 		this.power = power;
 		this.defense = defense;
+		
+		currentAnim = animIdle;
+		hpVisible = true;
+		hpBar = new Healthbar(this);
 	}
 	
 	public Creature(String name, int currentHp, int maxHp, int power, int defense, Handler handler) {
@@ -46,27 +53,34 @@ public abstract class Creature {
 		this.power = power;
 		this.defense = defense;
 		this.handler = handler;
+		
+		currentAnim = animIdle;
+		hpVisible = true;
+		hpBar = new Healthbar(this);
 	}
 	
 	public void tick() {
-		// Tick all animations here!
-		animIdle.tick();
-		animAttack.tick();
-		animDeath.tick();
+		// Tick all active animations here!
+
+		if (!(currentAnim == animDeath && currentAnim.getIndex() >= currentAnim.getMaxIndex()))
+			currentAnim.tick();
+		
+		hpBar.tick();
 	}
 	
 	public void render(Graphics g) {
-		// TODO : render where exactly? (responsive?)
 		g.drawImage(getCurrentAnimationFrame(),
 				xPos, yPos, width, height, null);
+		
+		if(hpVisible)
+			hpBar.render(g);
 	}
 	
 	protected BufferedImage getCurrentAnimationFrame() {
-		// TODO : if structure that returns images based on what creature is doing
-		return animIdle.getCurrentFrame();
+		return currentAnim.getCurrentFrame();
 	}
 	
-	public void scaleUpMultipler(int multiplier) {
+	public void scaleUpMultiplier(int multiplier) {
 		width *= multiplier;
 		height *= multiplier;		
 	}
@@ -88,7 +102,18 @@ public abstract class Creature {
 	// "Attack" Ability
 	public int dealDamageToOpponent(Creature receiver) {
 		int dmgDone = calculateDamageToOpponent(receiver);
+		currentAnim = animAttack;
+		currentAnim.setIndex(3);
 		receiver.receiveDamage(dmgDone);
+		Utils.waitInMs(msBetweenTurns);
+		currentAnim = animIdle;
+		
+		if (receiver.getCurrentHp() == 0 && receiver.isEnemy()) {
+			Utils.waitInMs(600);
+		} else if (receiver.getCurrentHp() == 0 && !receiver.isEnemy()) {
+			Utils.waitInMs(2000);
+		}
+		
 		return dmgDone;
 	}
 	
@@ -103,13 +128,21 @@ public abstract class Creature {
 		currentHp -= receivedDmg;
 		if (currentHp < 0)
 			currentHp = 0;
+		if (currentHp == 0) {
+			currentAnim = animDeath;
+			currentAnim.setIndex(0);
+		}
 	}
 	
 	// "Battle Cry" Ability
 	public void debuffPowerOfOpponent(Creature receiver) {
+		currentAnim = animBattleCry;
+		currentAnim.setIndex(3);
 		this.buffPower(1); // TODO : diminishing returns
 		receiver.debuffPower(1); // TODO : diminishing returns
 		receiver.buffDefense(1); // TODO : diminishing returns
+		Utils.waitInMs(msBetweenTurns);
+		currentAnim = animIdle;
 	}
 	
 	public void buffPower(int addedPwr) {
@@ -122,7 +155,11 @@ public abstract class Creature {
 	
 	// "Shields Up" Ability
 	public void buffOwnDefense() {
+		currentAnim = animShieldsUp;
+		currentAnim.setIndex(3);
 		this.buffDefense(1); // TODO : diminishing returns
+		Utils.waitInMs(msBetweenTurns);
+		currentAnim = animIdle;
 	}
 	
 	public void buffDefense(int addedDef) {
@@ -142,7 +179,9 @@ public abstract class Creature {
 	}
 	
 	public void kill() {
+		currentAnim = animDeath;
 		currentHp = 0;
+		Utils.waitInMs(2000);
 	}
 	
 	// ### GETTERS & SETTERS
@@ -189,5 +228,17 @@ public abstract class Creature {
 
 	public int getHeight() {
 		return height;
+	}
+
+	public void setAnimSpeed(int animSpeed) {
+		this.animSpeed = animSpeed;
+	}
+
+	public void setHpVisible(boolean hpVisible) {
+		this.hpVisible = hpVisible;
+	}
+
+	public boolean isEnemy() {
+		return isEnemy;
 	}
 }

@@ -11,20 +11,18 @@ public class DangerDoggo extends Creature {
 		super("Danger Doggo", 12, 12, 13, 12);
 		isEnemy = true;
 
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.doggo_idle);
 		animAttack = new Animation(animSpeed, Assets.doggo_attack);
 		animDeath = new Animation(animSpeed, Assets.doggo_death);
+		currentAnim = animIdle;
 	}
 	
 	public DangerDoggo(Handler handler) {
 		super("Danger Doggo", 12, 12, 13, 12, handler);
 
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.doggo_idle);
 		animAttack = new Animation(animSpeed, Assets.doggo_attack);
 		animDeath = new Animation(animSpeed, Assets.doggo_death);
+		currentAnim = animIdle;
 	}
 }

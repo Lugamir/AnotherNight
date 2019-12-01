@@ -2,7 +2,6 @@ package armase.anothernight.states;
 
 import java.awt.Graphics;
 
-import armase.anothernight.ConsoleVersion;
 import armase.anothernight.Handler;
 import armase.anothernight.entities.EntityManager;
 import armase.anothernight.entities.creatures.Creature;
@@ -32,7 +31,7 @@ public class MenuState extends State {
 		enemy = generateRndEnemy();
 		int enemyPosX = handler.getWidth() - enemy.getWidth() - 10;
 		int enemyPosY =  handler.getHeight() - enemy.getHeight() - 10;
-		enemy.setPosition(enemyPosX, enemyPosY);
+		enemy.setPosition(enemyPosX, enemyPosY).setHpVisible(false);;
 		entityManager = new EntityManager(handler, enemy);
 		
 		uiManager = new UIManager(handler);
@@ -66,21 +65,12 @@ public class MenuState extends State {
 			}));
 		
 		// Super Secret Vegeta Mode!
-		uiManager.addObject(new UIImageButton(handler.getWidth() - 128, handler.getHeight() - 64, 128, 64, Assets.btn_secret,
+		uiManager.addObject(new UIImageButton(0, handler.getHeight() - 64, 128, 64, Assets.btn_secret,
 			new ClickListener() {
 				@Override
 				public void onClick() {
 					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
 					State.setState(new DayState(handler, new Vegeta(handler), 1));
-				}
-			}));
-
-		// Console Mode!
-		uiManager.addObject(new UIImageButton(0, handler.getHeight() - 64, 128, 64, Assets.btn_secret,
-			new ClickListener() {
-				@Override
-				public void onClick() {
-					new ConsoleVersion();
 				}
 			}));
 	}

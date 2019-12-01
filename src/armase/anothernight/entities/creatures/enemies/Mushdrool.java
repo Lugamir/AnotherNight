@@ -11,21 +11,19 @@ public class Mushdrool extends Creature {
 		super("Mushdrool", 20, 20, 8, 15);
 		isEnemy = true;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
 		animAttack = new Animation(animSpeed, Assets.mushdrool_attack);
 		animDeath = new Animation(animSpeed, Assets.mushdrool_death);
+		currentAnim = animIdle;
 	}
 	
 	public Mushdrool(Handler handler) {
 		super("Mushdrool", 20, 20, 8, 15, handler);
 		isEnemy = true;
 		
-		// Animations - set anim speed in ms here
-		int animSpeed = 300;
 		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
 		animAttack = new Animation(animSpeed, Assets.mushdrool_attack);
 		animDeath = new Animation(animSpeed, Assets.mushdrool_death);
+		currentAnim = animIdle;
 	}
 }

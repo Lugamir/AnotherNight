@@ -2,7 +2,6 @@ package armase.anothernight.entities;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 import armase.anothernight.Handler;
 import armase.anothernight.entities.creatures.Creature;

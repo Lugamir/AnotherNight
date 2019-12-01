@@ -31,4 +31,31 @@ public class Animation {
 	public BufferedImage getCurrentFrame() {
 		return frames[index];
 	}
+	
+	public int getMaxIndex() {
+		return frames.length - 1;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	
+//	public boolean isOnFirstFrame() {
+//		if (index == 0)
+//			return true;
+//		else
+//			return false;
+//	}
+//	
+//	public boolean isOnLastFrame() {
+//		if (index >= frames.length - 1)
+//			return true;
+//		else
+//			return false;
+//	}
+	
 }
