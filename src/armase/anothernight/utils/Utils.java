@@ -1,6 +1,7 @@
 package armase.anothernight.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Utils {
+	
+	public static String gameFolderPath = System.getProperty("user.home")
+			+ File.separator + "Documents" + File.separator + "AnotherNight";
+	public static File gameFolderFile = new File(gameFolderPath);
 
 	public static String loadFileAsString(String path) {
 		StringBuilder builder = new StringBuilder();
@@ -25,6 +30,15 @@ public class Utils {
 		}
 		
 		return builder.toString();
+	}
+	
+	public static boolean gameFolderExists() {
+		return gameFolderFile.exists();
+	}
+	
+	public static void createGameFolder() {
+		if(!gameFolderExists())
+			gameFolderFile.mkdirs();
 	}
 	
 	public static int parseInt(String number) {
@@ -60,6 +74,14 @@ public class Utils {
 	public static String getDateTimeStamp() {
 		Date today = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		return "[ " + formatter.format(today) + " ]";
+		return formatter.format(today);
+	}
+
+	public static String getGameFolderPath() {
+		return gameFolderPath;
+	}
+
+	public static File getGameFolderFile() {
+		return gameFolderFile;
 	}
 }

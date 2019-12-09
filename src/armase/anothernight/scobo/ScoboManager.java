@@ -39,8 +39,16 @@ public class ScoboManager {
 	}
 	
 	public static void writeToScobo(String name, String score) throws IOException {
-		scoboWriter.write(Utils.getDateTimeStamp() + ";" + name + ";" + score + ";\n");
+//		try {
+//			scoboWriter = new PrintWriter(scoboPath, "UTF-8");
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
+		scoboWriter.write(Utils.getDateTimeStamp() + ";" + name + ";" + score + ";");
 		scoboWriter.flush();
+//		scoboWriter.close();
 	}
 	
 	public static boolean scoboMatrixIsEmpty(ArrayList<String[]> scoboMatrix) {

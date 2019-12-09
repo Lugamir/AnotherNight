@@ -2,14 +2,21 @@ package armase.anothernight;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import armase.anothernight.audio.AudioPlayer;
 import armase.anothernight.display.Display;
 import armase.anothernight.gfx.Assets;
 import armase.anothernight.gfx.BackdropManager;
 import armase.anothernight.input.KeyManager;
 import armase.anothernight.input.MouseManager;
+import armase.anothernight.scobo.ScoboManager;
 import armase.anothernight.states.MenuState;
 import armase.anothernight.states.State;
+import armase.anothernight.utils.Utils;
 
 public class Game implements Runnable {
 	
@@ -42,9 +49,31 @@ public class Game implements Runnable {
 		
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
+		
+		// Works in IDE but not in JAR, leave for reference
+		try {
+			new AudioPlayer();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void init() {
+		Utils.createGameFolder();
+		
+		try {
+			ScoboManager.initScobo();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		// MouseListener on frame & canvas prevents problems in different environments
@@ -85,13 +114,12 @@ public class Game implements Runnable {
 			}
 			
 			if(timer >= 1_000_000_000) {
-//				System.out.println("Ticks & Frames: " + ticks); // TODO : remove testline
+//				System.out.println("Ticks & Frames: " + ticks);
+				// TODO : devtool graphical fps counter
 				ticks = 0;
 				timer = 0;
 			}
 		}
-		
-//		runConsoleVersion();
 		
 		stop();
 	}
