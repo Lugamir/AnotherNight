@@ -33,12 +33,12 @@ public class DayState extends State {
 		
 		msBetweenTurns = 1200;
 
-		playerPosX = handler.getWidth() / 3 - 240;
+		playerPosX = player.getWidth() / 2;
 		playerPosY = handler.getHeight() / 10 * 5;
 		
 		enemy = generateRndEnemy();
 		
-		enemyPosX = handler.getWidth() - 240;
+		enemyPosX = handler.getWidth() - enemy.getWidth() * 3 / 2;
 		enemyPosY =  handler.getHeight() / 10 * 5;
 
 		player.setPosition(playerPosX, playerPosY);
@@ -51,7 +51,8 @@ public class DayState extends State {
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
 		
-		handler.getBackdropManager().setCurrentBackdropImage(Assets.nightBackdrop);
+//		handler.getBackdropManager().setCurrentBackdrop(Assets.nightBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.test); // TODO : animated night backdrop
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
@@ -95,7 +96,7 @@ public class DayState extends State {
 					}
 				}));
 		
-		uiManager.addObject(new UIImageButton(handler.getWidth() - buttonWidth - buttonSpacing, buttonSpacing, buttonWidth, buttonHeight, Assets.btn_secret,
+		uiManager.addObject(new NightCounter(handler, dayCount,
 				new ClickListener() {
 					@Override
 					public void onClick() {
@@ -104,8 +105,6 @@ public class DayState extends State {
 						changeStateMaybe();
 					}
 				}));
-		
-		uiManager.addObject(new NightCounter(handler, dayCount));
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class WinState extends State {
 		int buttonWidth = 128;
 		int buttonHeight = 64;
 		
-		handler.getBackdropManager().setCurrentBackdropImage(Assets.winBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.winBackdrop);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

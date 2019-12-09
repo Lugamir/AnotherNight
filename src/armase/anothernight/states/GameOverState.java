@@ -26,7 +26,7 @@ public class GameOverState extends State {
 		int buttonWidth = 128;
 		int buttonHeight = 64;
 		
-		handler.getBackdropManager().setCurrentBackdropImage(Assets.gameOverBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.gameOverBackdrop);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

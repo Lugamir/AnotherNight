@@ -9,6 +9,7 @@ public class Player extends Creature {
 	public Player() {
 		super("Anni", 50, 50, 10, 10);
 		isEnemy = false;
+		animSpeed = 120;
 		
 		animIdle = new Animation(animSpeed, Assets.player_idle);
 		animAttack = new Animation(animSpeed, Assets.player_attack);
@@ -21,6 +22,7 @@ public class Player extends Creature {
 	public Player(Handler handler) {
 		super("Anni", 50, 50, 10, 10, handler);
 		isEnemy = false;
+		animSpeed = 120;
 		
 		animIdle = new Animation(animSpeed, Assets.player_idle);
 		animAttack = new Animation(animSpeed, Assets.player_attack);

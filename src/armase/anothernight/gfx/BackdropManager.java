@@ -37,13 +37,13 @@ public class BackdropManager {
 	
 	// ### GETTERS & SETTERS
 
-	public void setCurrentBackdropImage(BufferedImage currentBackdropImage) {
+	public void setCurrentBackdrop(BufferedImage currentBackdropImage) {
 		this.currentBackdrop = currentBackdropImage;
 		isAnimated = false;
 		
 	}
 	
-	public void setCurrentBackdropImage(BufferedImage[] animBackdrop) {
+	public void setCurrentBackdrop(BufferedImage[] animBackdrop) {
 		this.animBackdrop = new Animation(300, animBackdrop);
 		isAnimated = true;
 	}

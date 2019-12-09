@@ -19,7 +19,7 @@ public class ScoreboardState extends State {
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
 		
-		handler.getBackdropManager().setCurrentBackdropImage(Assets.scoreboardBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.scoreboardBackdrop);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

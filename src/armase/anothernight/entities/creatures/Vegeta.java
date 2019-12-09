@@ -1,33 +1,27 @@
 package armase.anothernight.entities.creatures;
 
 import armase.anothernight.Handler;
-import armase.anothernight.gfx.Animation;
-import armase.anothernight.gfx.Assets;
 
-public class Vegeta extends Creature {
+// for testing & enemy whacking purposes
 
+public class Vegeta extends Player {
+	
 	public Vegeta() {
-		super("Vegeta", 9001, 9001, 9001, 9001);
-		isEnemy = false;
+		super();
 		
-		animIdle = new Animation(animSpeed, Assets.player_idle);
-		animAttack = new Animation(animSpeed, Assets.player_attack);
-		animBattleCry = new Animation(animSpeed, Assets.player_battleCry);
-		animShieldsUp = new Animation(animSpeed, Assets.player_shieldsUp);
-		animDeath = new Animation(animSpeed, Assets.player_death);
-		currentAnim = animIdle;
+		currentHp = 9001;
+		maxHp = 9001;
+		power = 9001;
+		defense = 9001;
 	}
 	
 	public Vegeta(Handler handler) {
-		super("Vegeta", 9001, 9001, 9001, 9001, handler);
-		isEnemy = false;
+		super(handler);
 		
-		animIdle = new Animation(animSpeed, Assets.player_idle);
-		animAttack = new Animation(animSpeed, Assets.player_attack);
-		animBattleCry = new Animation(animSpeed, Assets.player_battleCry);
-		animShieldsUp = new Animation(animSpeed, Assets.player_shieldsUp);
-		animDeath = new Animation(animSpeed, Assets.player_death);
-		currentAnim = animIdle;
+		currentHp = 9001;
+		maxHp = 9001;
+		power = 9001;
+		defense = 9001;
 	}
 
 }

@@ -12,12 +12,14 @@ public class NightCounter extends UIObject {
 	private Handler handler;
 	private Animation animNightWord;
 	private int nightCount;
+	private ClickListener clicker;
 
-	public NightCounter(Handler handler, int nightCount) {
-		super(handler.getWidth() - 128 - handler.getWidth() / 20, handler.getHeight() / 10, 128, 64);
+	public NightCounter(Handler handler, int nightCount, ClickListener clicker) {
+		super(handler.getWidth() / 30, handler.getHeight() / 10, 128, 64);
 		this.handler = handler;
 		animNightWord = new Animation(300, Assets.night_word);
 		this.nightCount = nightCount;
+		this.clicker = clicker;
 	}
 
 	@Override
@@ -36,6 +38,7 @@ public class NightCounter extends UIObject {
 
 	@Override
 	public void onClick() {
+		clicker.onClick();
 	}
 	
 	private BufferedImage getCurrentNightAnimationFrame() {
@@ -47,7 +50,7 @@ public class NightCounter extends UIObject {
 	}
 
 	private void updatePositionVariables() {
-		x = handler.getWidth() - width - handler.getWidth() / 10;
+		x = handler.getWidth() / 30;
 		y = handler.getHeight() / 20;
 	}
 }
