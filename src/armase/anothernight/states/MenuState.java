@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import armase.anothernight.Handler;
 import armase.anothernight.entities.EntityManager;
 import armase.anothernight.entities.creatures.Creature;
+import armase.anothernight.entities.creatures.Player;
 import armase.anothernight.entities.creatures.Vegeta;
 import armase.anothernight.entities.creatures.enemies.DangerDoggo;
 import armase.anothernight.entities.creatures.enemies.HiddenBug;
@@ -72,6 +73,16 @@ public class MenuState extends State {
 				public void onClick() {
 					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
 					State.setState(new DayState(handler, new Vegeta(handler), 1));
+				}
+			}));
+		
+		// Tutorial
+		uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - 128, handler.getHeight() / 2 - 64, 128, 64, Assets.btn_tutorial,
+			new ClickListener() {
+				@Override
+				public void onClick() {
+					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
+					State.setState(new TutorialState(handler, new Player(handler), 1));
 				}
 			}));
 	}

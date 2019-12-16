@@ -18,7 +18,7 @@ public class Assets {
 	public static BufferedImage test;
 
 	// UI Elements
-	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok;
+	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok, btn_tutorial;
 	public static BufferedImage[] btn_attack, btn_battleCry, btn_shieldsUp;
 	public static BufferedImage[] btn_secret;
 	public static BufferedImage[] night_word, numbers;
@@ -42,6 +42,8 @@ public class Assets {
 	public static BufferedImage[] skeleton_idle;
 	public static BufferedImage[] skeleton_attack;
 	public static BufferedImage[] skeleton_death;
+	public static BufferedImage dummy;
+	public static BufferedImage[] dummy_all;
 	
 	// TODO : fill with missing sprites & backdrops, structure is ready
 
@@ -60,6 +62,7 @@ public class Assets {
 		SpriteSheet mushdroolSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mushdrool.png"));
 		SpriteSheet doggoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/borko.png"));
 		SpriteSheet skeletonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/skeleton.png"));
+		SpriteSheet dummySheet = new SpriteSheet(ImageLoader.loadImage("/textures/dummy.png"));
 		SpriteSheet abilitySheet = new SpriteSheet(ImageLoader.loadImage("/textures/ability_buttons.png"));
 		SpriteSheet nightWordSheet = new SpriteSheet(ImageLoader.loadImage("/textures/night_word.png"));
 		SpriteSheet numbersSheet = new SpriteSheet(ImageLoader.loadImage("/textures/one_to_ten.png"));
@@ -89,6 +92,7 @@ public class Assets {
 		btn_start = new BufferedImage[2];
 		btn_scoreboard = new BufferedImage[2];
 		btn_quit = new BufferedImage[2];
+		btn_tutorial = new BufferedImage[2];
 		btn_ok = new BufferedImage[2];
 		btn_start[0] =		buttonSheet.crop(0, 0, width * 4, height * 2);
 		btn_start[1] =		buttonSheet.crop(width * 4, 0, width * 4, height * 2);
@@ -98,6 +102,8 @@ public class Assets {
 		btn_quit[1] =		buttonSheet.crop(width * 4, height * 4, width * 4, height * 2);
 		btn_ok[0] =			buttonSheet.crop(0, height * 6, width * 4, height * 2);
 		btn_ok[1] =			buttonSheet.crop(width * 4, height * 6, width * 4, height * 2);
+		btn_tutorial[0] =		buttonSheet.crop(0, height * 8, width * 4, height * 2);
+		btn_tutorial[1] =		buttonSheet.crop(width * 4, height * 8, width * 4, height * 2);
 		
 		// Night Counter
 		night_word = new BufferedImage[4];
@@ -176,5 +182,11 @@ public class Assets {
 		for (int i = 0; i < 4; i++)
 			skeleton_death[i] = skeletonSheet.crop(width * i, height * 2, width, height);
 		skeleton = skeletonSheet.crop(0, 0, width, height);
+		
+		// Dummy Sheet Crops
+		dummy_all = new BufferedImage[4];
+		for (int i = 0; i < 4; i++)
+			dummy_all[i] = dummySheet.crop(width * i, 0, width, height);
+		dummy = dummySheet.crop(0, 0, width, height);
 	}
 }
