@@ -1,6 +1,8 @@
 package armase.anothernight.gfx;
 
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Assets {
 
@@ -45,7 +47,9 @@ public class Assets {
 	public static BufferedImage dummy;
 	public static BufferedImage[] dummy_all;
 	
-	// TODO : fill with missing sprites & backdrops, structure is ready
+	// Alphabet
+	public static BufferedImage[] alphabetImages;
+    public static Map<Character, BufferedImage> alphabetMap = new HashMap<>();
 
 	public static void init() {
 
@@ -69,6 +73,8 @@ public class Assets {
 		SpriteSheet missingSheet = new SpriteSheet(ImageLoader.loadImage("/textures/img_missing_16.png"));
 		SpriteSheet secretSheet = new SpriteSheet(ImageLoader.loadImage("/textures/secretbutton.png"));
 		
+		SpriteSheet alphabetSheet = new SpriteSheet(ImageLoader.loadImage("/textures/alphabet.png"));
+		
 		// Placeholder
 		placeholder = ImageLoader.loadImage("/backdrops/placeholder.jpg");
 		placeholders = new BufferedImage[2];
@@ -79,7 +85,8 @@ public class Assets {
 		mainMenuBackdrop = new BufferedImage[2];
 		for (int i = 0; i < mainMenuBackdrop.length; i++)
 			mainMenuBackdrop[i] = mainMenuSheet.crop(800 * i, 0, 800, 600);
-		prefaceBackdrop = ImageLoader.loadImage("/backdrops/preface.png");
+//		prefaceBackdrop = ImageLoader.loadImage("/backdrops/preface.png");
+		prefaceBackdrop = ImageLoader.loadImage("/backdrops/black.png");
 		nightBackdrop = new BufferedImage[4];
 		for (int i = 0; i < nightBackdrop.length; i++)
 			nightBackdrop[i] = nightSheet.crop(800 * i, 0, 800, 600);
@@ -188,5 +195,15 @@ public class Assets {
 		for (int i = 0; i < 4; i++)
 			dummy_all[i] = dummySheet.crop(width * i, 0, width, height);
 		dummy = dummySheet.crop(0, 0, width, height);
+		
+		// Alphabet
+        alphabetImages = new BufferedImage[30];
+		for (int i = 0; i < alphabetImages.length; i++)
+			alphabetImages[i] = alphabetSheet.crop(16 * i, 0, 16, height);
+		
+        char[] alphabetArray = "abcdefghijklmnopqrstuvwxyz.,!?".toCharArray();
+        for(int i = 0; i < alphabetArray.length; i++) {
+            alphabetMap.put(alphabetArray[i], alphabetImages[i]);
+        }
 	}
 }

@@ -12,6 +12,7 @@ import armase.anothernight.entities.creatures.enemies.HiddenBug;
 import armase.anothernight.entities.creatures.enemies.Mushdrool;
 import armase.anothernight.entities.creatures.enemies.SneakySkeleton;
 import armase.anothernight.gfx.Assets;
+import armase.anothernight.gfx.GFXwriter;
 import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
@@ -34,11 +35,13 @@ public class MenuState extends State {
 		int enemyPosX = handler.getWidth() - enemy.getWidth() - 10;
 		int enemyPosY =  handler.getHeight() - enemy.getHeight() - 10;
 		enemy.setPosition(enemyPosX, enemyPosY).setHpVisible(false);;
+		
 		entityManager = new EntityManager(handler, enemy);
 		
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 		
+		// Start
 		uiManager.addObject(new UIImageButton(200 - 64, handler.getHeight() - 200 - 32, 128, 64, Assets.btn_start,
 			new ClickListener() {
 				@Override
@@ -48,6 +51,7 @@ public class MenuState extends State {
 				}
 			}));
 
+		// Scoreboard
 		uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - 64, handler.getHeight() - 200 - 32, 128, 64, Assets.btn_scoreboard,
 			new ClickListener() {
 				@Override
@@ -57,6 +61,7 @@ public class MenuState extends State {
 				}
 			}));
 
+		// Quit
 		uiManager.addObject(new UIImageButton(handler.getWidth() - 200 - 64, handler.getHeight() - 200 - 32, 128, 64, Assets.btn_quit,
 			new ClickListener() {
 				@Override
@@ -77,7 +82,7 @@ public class MenuState extends State {
 			}));
 		
 		// Tutorial
-		uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - 128, handler.getHeight() / 2 - 64, 128, 64, Assets.btn_tutorial,
+		uiManager.addObject(new UIImageButton(200 - 64, handler.getHeight() - 100 - 32, 128, 64, Assets.btn_tutorial,
 			new ClickListener() {
 				@Override
 				public void onClick() {
