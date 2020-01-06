@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import armase.anothernight.Handler;
 import armase.anothernight.gfx.Assets;
+import armase.anothernight.gfx.GFXwriter;
 import armase.anothernight.scobo.ScoboManager;
 import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
@@ -13,7 +14,9 @@ import armase.anothernight.ui.UIManager;
 
 public class ScoreboardState extends State {
 	
-	UIManager uiManager;
+	private UIManager uiManager;
+	private String text;
+	private ArrayList<String> scoboEntries;
 
 	public ScoreboardState(Handler handler) {
 		super(handler);
@@ -21,6 +24,9 @@ public class ScoreboardState extends State {
 		int buttonWidth = 128;
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
+		
+		text = "";
+		scoboEntries = new ArrayList<String>();
 		
 		handler.getBackdropManager().setCurrentBackdrop(Assets.scoreboardBackdrop);
 
@@ -40,22 +46,30 @@ public class ScoreboardState extends State {
 		try {
 			ArrayList<String[]> scoboMatrix = ScoboManager.loadScoreboardMatrix();
 			if(!ScoboManager.scoboMatrixIsEmpty(scoboMatrix)) {
-				System.out.println("SCORES FOUND:"); // TODO : remove test line
+				scoboEntries.add("Scores found:");
 				for(String[] line : scoboMatrix) {
 					for(int i = 0; i < line.length; i++) {
-						// TODO : display graphical scobo with uiManager
-						System.out.print(line[i] + "\t"); // TODO : remove test line
+						text += line[i] + " "; // TODO : fix the ugly
 					}
-					System.out.println(); // TODO : remove test line
+					scoboEntries.add(text); // TODO : fix the ugly
+					text = ""; // TODO : fix the ugly
 				}
 			} else {
-				// TODO : display "no scores yet"
-				System.out.println("NO SCORES FOUND"); // TODO : remove test line
+				scoboEntries.add("No scores yet!");
 			}
 		} catch (IOException e) {
-			System.out.println("SOMETHING WENT WRONG"); // TODO : remove test line
+			scoboEntries.add("Something went wrong, toss your admin a coin!");
 			e.printStackTrace();
 		}
+		
+//		uiManager.addObject(new UIImageButton(handler.getWidth() - buttonWidth - buttonSpacing, buttonSpacing, buttonWidth, buttonHeight, GFXwriter.createBufferedImageFromMsg(text, handler.getWidth(), handler.getHeight()),
+//				new ClickListener() {
+//					@Override
+//					public void onClick() {
+//						handler.getMouseManager().setUIManager(null); // buttons disappear on state change
+//						State.setState(new MenuState(handler));
+//					}
+//				}));
 	}
 
 	@Override
@@ -68,5 +82,15 @@ public class ScoreboardState extends State {
 	public void render(Graphics g) {
 		handler.getBackdropManager().render(g);
 		uiManager.render(g);
+
+		// TODO : only renders should be in render // TODO : fix the ugly
+		int yStart = handler.getHeight() / 12;
+		for(String entry : scoboEntries) {
+			GFXwriter.write(g, entry, handler.getWidth() / 10,
+					yStart += 32, handler.getWidth() / 10 * 9);
+		}
+		
+//		GFXwriter.write(g, text, handler.getWidth() / 10,
+//				handler.getHeight() / 12, handler.getWidth() / 10 * 9);
 	}
 }

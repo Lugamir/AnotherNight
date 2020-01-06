@@ -46,7 +46,7 @@ public class ScoboManager {
 //		} catch (UnsupportedEncodingException e) {
 //			e.printStackTrace();
 //		}
-		scoboWriter.write(Utils.getDateTimeStamp() + ";" + name + ";" + score + ";");
+		scoboWriter.write(Utils.getDateTimeStamp() + ";" + name + ";" + score + ";" + "\n");
 		scoboWriter.flush();
 //		scoboWriter.close();
 	}

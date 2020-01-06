@@ -54,7 +54,7 @@ public class PrefaceState extends State {
 		uiManager.render(g);
 		
 		// TODO : only renders should be in render
-		GFXwriter.write(g, "Preface", handler.getWidth() / 10,
+		GFXwriter.write(g, "- Preface -", handler.getWidth() / 10,
 				handler.getHeight() / 12, handler.getWidth() / 10 * 9, 2);
 		GFXwriter.write(g, introMsg1, handler.getWidth() / 10,
 				handler.getHeight() / 4, handler.getWidth() / 10 * 9);

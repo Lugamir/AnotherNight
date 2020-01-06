@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import armase.anothernight.Handler;
 import armase.anothernight.entities.creatures.Creature;
 import armase.anothernight.gfx.Assets;
+import armase.anothernight.gfx.GFXwriter;
 import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
@@ -14,6 +15,9 @@ public class WinState extends State {
 	UIManager uiManager;
 	Creature player;
 
+	private String winMsg1 = "Wow, girlie! You've proven yourself. Let me introduce you to the boys...";
+	private String winMsg2 = "Congrats, you won!";
+	
 	public WinState(Handler handler, Creature player) {
 		super(handler);
 		this.player = player;
@@ -49,5 +53,13 @@ public class WinState extends State {
 	public void render(Graphics g) {
 		handler.getBackdropManager().render(g);
 		uiManager.render(g);
+		
+		// TODO : only renders should be in render
+		GFXwriter.write(g, "- WIN -", handler.getWidth() / 10,
+				handler.getHeight() / 12, handler.getWidth() / 10 * 9, 2);
+		GFXwriter.write(g, winMsg1, handler.getWidth() / 10,
+				handler.getHeight() / 4, handler.getWidth() / 10 * 9);
+		GFXwriter.write(g, winMsg2, handler.getWidth() / 10,
+				handler.getHeight() / 4 * 2, handler.getWidth() / 10 * 9);
 	}
 }

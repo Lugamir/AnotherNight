@@ -90,9 +90,12 @@ public class Assets {
 		nightBackdrop = new BufferedImage[4];
 		for (int i = 0; i < nightBackdrop.length; i++)
 			nightBackdrop[i] = nightSheet.crop(800 * i, 0, 800, 600);
-		gameOverBackdrop = ImageLoader.loadImage("/backdrops/gameover.png");
-		winBackdrop = ImageLoader.loadImage("/backdrops/youwon.png");
-		scoreboardBackdrop = ImageLoader.loadImage("/backdrops/scoreboard.png");
+//		gameOverBackdrop = ImageLoader.loadImage("/backdrops/gameover.png");
+		gameOverBackdrop = ImageLoader.loadImage("/backdrops/black.png");
+//		winBackdrop = ImageLoader.loadImage("/backdrops/youwon.png");
+		winBackdrop = ImageLoader.loadImage("/backdrops/forest_night.png");
+//		scoreboardBackdrop = ImageLoader.loadImage("/backdrops/scoreboard.png");
+		scoreboardBackdrop = ImageLoader.loadImage("/backdrops/black.png");
 		test = ImageLoader.loadImage("/backdrops/forest_night.png");
 		
 		// Button Sheet Crops
@@ -197,11 +200,11 @@ public class Assets {
 		dummy = dummySheet.crop(0, 0, width, height);
 		
 		// Alphabet
-        alphabetImages = new BufferedImage[30];
+        alphabetImages = new BufferedImage[43];
 		for (int i = 0; i < alphabetImages.length; i++)
 			alphabetImages[i] = alphabetSheet.crop(16 * i, 0, 16, height);
 		
-        char[] alphabetArray = "abcdefghijklmnopqrstuvwxyz.,!?".toCharArray();
+        char[] alphabetArray = "abcdefghijklmnopqrstuvwxyz.,!?':-1234567890".toCharArray();
         for(int i = 0; i < alphabetArray.length; i++) {
             alphabetMap.put(alphabetArray[i], alphabetImages[i]);
         }
