@@ -14,10 +14,10 @@ public class PrefaceState extends State {
 	
 	private UIManager uiManager;
 	
-	private String introMsg1 = "Another Night is a story about a girl named Anni."
-			+ " Anni wants to get into the Amazing Warrior Guild but they are sexist.";
-	private String introMsg2 = "You are Anni and your objective is to survive ten nights in the Forest of DooOOOOoom"
-			+ " to prove your worth to the Amazing Warrior Guild...";
+	private String introMsg1 = "Another Night is a story about a girl   named Anni."
+			+ " Anni wants to get into the  Amazing Warrior Guild but they are      sexist.";
+	private String introMsg2 = "You are Anni and your objective is to   survive ten nights in the Forest of     DooOOOOoom"
+			+ " to prove your worth to the   Amazing Warrior Guild...";
 
 	public PrefaceState(Handler handler) {
 		super(handler);
