@@ -83,11 +83,11 @@ public class ScoreboardState extends State {
 		handler.getBackdropManager().render(g);
 		uiManager.render(g);
 
-		// TODO : only renders should be in render // TODO : fix the ugly
+		// TODO : only renders should be in render  // TODO : fix the ugly
 		int yStart = handler.getHeight() / 12;
 		for(String entry : scoboEntries) {
 			GFXwriter.write(g, entry, handler.getWidth() / 10,
-					yStart += 32, handler.getWidth() / 10 * 9);
+					yStart += 32, handler.getWidth());
 		}
 		
 //		GFXwriter.write(g, text, handler.getWidth() / 10,

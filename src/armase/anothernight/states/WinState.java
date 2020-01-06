@@ -1,11 +1,13 @@
 package armase.anothernight.states;
 
 import java.awt.Graphics;
+import java.io.IOException;
 
 import armase.anothernight.Handler;
 import armase.anothernight.entities.creatures.Creature;
 import armase.anothernight.gfx.Assets;
 import armase.anothernight.gfx.GFXwriter;
+import armase.anothernight.scobo.ScoboManager;
 import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
@@ -23,6 +25,13 @@ public class WinState extends State {
 		this.player = player;
 		
 		System.out.println("Won with " + player.getCurrentHp() + " HP left!"); // TODO : remove testline
+		
+		try {
+			ScoboManager.writeToScobo("Anni", "survived night 10!");
+			// TODO : prompt: add score? name?
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		int buttonWidth = 128;
 		int buttonHeight = 64;
