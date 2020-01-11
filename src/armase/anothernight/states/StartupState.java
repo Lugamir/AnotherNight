@@ -20,7 +20,7 @@ public class StartupState extends State {
 		uiManager = new UIManager(handler);
 		uiManager.addObject(new Logo(handler.getWidth() / 2 - 160, handler.getHeight() / 2 - 200, 320, 400));
 		
-		openMenuAfterMillis(4000);
+		openMenuAfterMillis(3600);
 	}
 
 	@Override
