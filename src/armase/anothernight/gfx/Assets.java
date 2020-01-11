@@ -17,13 +17,16 @@ public class Assets {
 	public static BufferedImage prefaceBackdrop, scoreboardBackdrop;
 	public static BufferedImage gameOverBackdrop, winBackdrop;
 	public static BufferedImage[] mainMenuBackdrop, nightBackdrop;
-	public static BufferedImage test;
+	public static BufferedImage test, black;
 
-	// UI Elements
+	// UI Elements	
 	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok, btn_tutorial;
 	public static BufferedImage[] btn_attack, btn_battleCry, btn_shieldsUp;
 	public static BufferedImage[] btn_secret;
 	public static BufferedImage[] night_word, numbers;
+	
+	// Logo
+	public static BufferedImage[] logo;
 	
 	// Creatures
 	public static BufferedImage player;
@@ -59,10 +62,11 @@ public class Assets {
 		SpriteSheet anniAtkBuffSheet = new SpriteSheet(ImageLoader.loadImage("/textures/anni_atkBuff.png"));
 		SpriteSheet anniDefBuffSheet = new SpriteSheet(ImageLoader.loadImage("/textures/anni_defBuff.png"));
 		SpriteSheet anniDeathSheet = new SpriteSheet(ImageLoader.loadImage("/textures/anni_death.png"));
-		
-		SpriteSheet mainMenuSheet = new SpriteSheet(ImageLoader.loadImage("/backdrops/mainmenu.png"));
+				
+		SpriteSheet logoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/logo.png"));
+//		SpriteSheet mainMenuSheet = new SpriteSheet(ImageLoader.loadImage("/backdrops/mainmenu.png"));
 		SpriteSheet buttonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/buttons.png"));
-		SpriteSheet nightSheet = new SpriteSheet(ImageLoader.loadImage("/backdrops/night.png"));
+//		SpriteSheet nightSheet = new SpriteSheet(ImageLoader.loadImage("/backdrops/night.png"));
 		SpriteSheet mushdroolSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mushdrool.png"));
 		SpriteSheet doggoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/borko.png"));
 		SpriteSheet skeletonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/skeleton.png"));
@@ -75,6 +79,11 @@ public class Assets {
 		
 		SpriteSheet alphabetSheet = new SpriteSheet(ImageLoader.loadImage("/textures/alphabet.png"));
 		
+		// Logo
+		logo = new BufferedImage[8];
+		for (int i = 0; i < logo.length; i++)
+			logo[i] = logoSheet.crop(64 * i, 0, 64, 80);
+		
 		// Placeholder
 		placeholder = ImageLoader.loadImage("/backdrops/placeholder.jpg");
 		placeholders = new BufferedImage[2];
@@ -82,21 +91,18 @@ public class Assets {
 		placeholders[1] = missingSheet.crop(width * 1, 0, width, height);
 		
 		// Backdrops
-		mainMenuBackdrop = new BufferedImage[2];
-		for (int i = 0; i < mainMenuBackdrop.length; i++)
-			mainMenuBackdrop[i] = mainMenuSheet.crop(800 * i, 0, 800, 600);
-//		prefaceBackdrop = ImageLoader.loadImage("/backdrops/preface.png");
+//		mainMenuBackdrop = new BufferedImage[2];
+//		for (int i = 0; i < mainMenuBackdrop.length; i++)
+//			mainMenuBackdrop[i] = mainMenuSheet.crop(800 * i, 0, 800, 600);
 		prefaceBackdrop = ImageLoader.loadImage("/backdrops/black.png");
-		nightBackdrop = new BufferedImage[4];
-		for (int i = 0; i < nightBackdrop.length; i++)
-			nightBackdrop[i] = nightSheet.crop(800 * i, 0, 800, 600);
-//		gameOverBackdrop = ImageLoader.loadImage("/backdrops/gameover.png");
+//		nightBackdrop = new BufferedImage[4];
+//		for (int i = 0; i < nightBackdrop.length; i++)
+//			nightBackdrop[i] = nightSheet.crop(800 * i, 0, 800, 600);
 		gameOverBackdrop = ImageLoader.loadImage("/backdrops/black.png");
-//		winBackdrop = ImageLoader.loadImage("/backdrops/youwon.png");
 		winBackdrop = ImageLoader.loadImage("/backdrops/forest_night.png");
-//		scoreboardBackdrop = ImageLoader.loadImage("/backdrops/scoreboard.png");
 		scoreboardBackdrop = ImageLoader.loadImage("/backdrops/black.png");
 		test = ImageLoader.loadImage("/backdrops/forest_night.png");
+		black = ImageLoader.loadImage("/backdrops/black.png");
 		
 		// Button Sheet Crops
 		btn_start = new BufferedImage[2];
@@ -112,8 +118,8 @@ public class Assets {
 		btn_quit[1] =		buttonSheet.crop(width * 4, height * 4, width * 4, height * 2);
 		btn_ok[0] =			buttonSheet.crop(0, height * 6, width * 4, height * 2);
 		btn_ok[1] =			buttonSheet.crop(width * 4, height * 6, width * 4, height * 2);
-		btn_tutorial[0] =		buttonSheet.crop(0, height * 8, width * 4, height * 2);
-		btn_tutorial[1] =		buttonSheet.crop(width * 4, height * 8, width * 4, height * 2);
+		btn_tutorial[0] =	buttonSheet.crop(0, height * 8, width * 4, height * 2);
+		btn_tutorial[1] =	buttonSheet.crop(width * 4, height * 8, width * 4, height * 2);
 		
 		// Night Counter
 		night_word = new BufferedImage[4];

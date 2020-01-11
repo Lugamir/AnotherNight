@@ -14,7 +14,7 @@ import armase.anothernight.gfx.BackdropManager;
 import armase.anothernight.input.KeyManager;
 import armase.anothernight.input.MouseManager;
 import armase.anothernight.scobo.ScoboManager;
-import armase.anothernight.states.MenuState;
+import armase.anothernight.states.StartupState;
 import armase.anothernight.states.State;
 import armase.anothernight.utils.Utils;
 
@@ -86,7 +86,8 @@ public class Game implements Runnable {
 		handler = new Handler(this);
 		backdropManager = new BackdropManager(handler);
 		
-		State.setState(new MenuState(handler));
+//		State.setState(new MenuState(handler));
+		State.setState(new StartupState(handler));
 	}
 	
 	public void run() {

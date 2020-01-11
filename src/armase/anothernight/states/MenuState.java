@@ -1,6 +1,10 @@
 package armase.anothernight.states;
 
+import java.awt.Desktop;
 import java.awt.Graphics;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import armase.anothernight.Handler;
 import armase.anothernight.entities.EntityManager;
@@ -12,7 +16,7 @@ import armase.anothernight.entities.creatures.enemies.HiddenBug;
 import armase.anothernight.entities.creatures.enemies.Mushdrool;
 import armase.anothernight.entities.creatures.enemies.SneakySkeleton;
 import armase.anothernight.gfx.Assets;
-import armase.anothernight.gfx.GFXwriter;
+import armase.anothernight.ui.AnimatedLogo;
 import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
@@ -41,6 +45,18 @@ public class MenuState extends State {
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 		
+		uiManager.addObject(new AnimatedLogo(handler.getWidth() / 100, handler.getHeight() / 100, 64, 80,
+			new ClickListener() {
+				@Override
+				public void onClick() {
+					try {
+						Desktop.getDesktop().browse(new URL("https://github.com/Tem-Dev/AnotherNight").toURI());
+					} catch (IOException | URISyntaxException e) {
+						e.printStackTrace();
+					}
+				}
+		}));
+		
 		// Start
 		uiManager.addObject(new UIImageButton(200 - 64, handler.getHeight() - 200 - 32, 128, 64, Assets.btn_start,
 			new ClickListener() {
@@ -60,9 +76,19 @@ public class MenuState extends State {
 					State.setState(new ScoreboardState(handler));
 				}
 			}));
+		
+		// Tutorial
+		uiManager.addObject(new UIImageButton(handler.getWidth() - 200 - 64, handler.getHeight() - 200 - 32, 128, 64, Assets.btn_tutorial,
+			new ClickListener() {
+				@Override
+				public void onClick() {
+					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
+					State.setState(new TutorialState(handler, new Player(handler), 1));
+				}
+			}));
 
 		// Quit
-		uiManager.addObject(new UIImageButton(handler.getWidth() - 200 - 64, handler.getHeight() - 200 - 32, 128, 64, Assets.btn_quit,
+		uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - 64, handler.getHeight() - 100 - 32, 128, 64, Assets.btn_quit,
 			new ClickListener() {
 				@Override
 				public void onClick() {
@@ -78,16 +104,6 @@ public class MenuState extends State {
 				public void onClick() {
 					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
 					State.setState(new DayState(handler, new Vegeta(handler), 1));
-				}
-			}));
-		
-		// Tutorial
-		uiManager.addObject(new UIImageButton(200 - 64, handler.getHeight() - 100 - 32, 128, 64, Assets.btn_tutorial,
-			new ClickListener() {
-				@Override
-				public void onClick() {
-					handler.getMouseManager().setUIManager(null); // buttons disappear on state change
-					State.setState(new TutorialState(handler, new Player(handler), 1));
 				}
 			}));
 	}
