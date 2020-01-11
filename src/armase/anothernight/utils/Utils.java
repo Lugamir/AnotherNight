@@ -1,9 +1,12 @@
 package armase.anothernight.utils;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -67,6 +70,14 @@ public class Utils {
 		try {
 			Thread.sleep(ms);
 		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void redirectTo(String urlString) {
+		try {
+			Desktop.getDesktop().browse(new URL(urlString).toURI());
+		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}

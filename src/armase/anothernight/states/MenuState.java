@@ -1,10 +1,6 @@
 package armase.anothernight.states;
 
-import java.awt.Desktop;
 import java.awt.Graphics;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 import armase.anothernight.Handler;
 import armase.anothernight.entities.EntityManager;
@@ -49,11 +45,7 @@ public class MenuState extends State {
 			new ClickListener() {
 				@Override
 				public void onClick() {
-					try {
-						Desktop.getDesktop().browse(new URL("https://github.com/Tem-Dev/AnotherNight").toURI());
-					} catch (IOException | URISyntaxException e) {
-						e.printStackTrace();
-					}
+					Utils.redirectTo("https://github.com/Tem-Dev/AnotherNight");
 				}
 		}));
 		
