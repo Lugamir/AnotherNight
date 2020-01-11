@@ -27,8 +27,8 @@ public class WinState extends State {
 		System.out.println("Won with " + player.getCurrentHp() + " HP left!"); // TODO : remove testline
 		
 		try {
-			ScoboManager.writeToScobo("Anni", "survived night 10!");
 			// TODO : prompt: add score? name?
+			ScoboManager.writeToScobo("Anni", "survived night 10!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +36,7 @@ public class WinState extends State {
 		int buttonWidth = 128;
 		int buttonHeight = 64;
 		
-		handler.getBackdropManager().setCurrentBackdrop(Assets.winBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.black);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

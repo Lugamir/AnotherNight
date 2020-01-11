@@ -28,7 +28,7 @@ public class ScoreboardState extends State {
 		text = "";
 		scoboEntries = new ArrayList<String>();
 		
-		handler.getBackdropManager().setCurrentBackdrop(Assets.scoreboardBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.black);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

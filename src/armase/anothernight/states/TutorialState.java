@@ -45,8 +45,7 @@ public class TutorialState extends State {
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
 		
-//		handler.getBackdropManager().setCurrentBackdrop(Assets.nightBackdrop);
-		handler.getBackdropManager().setCurrentBackdrop(Assets.test); // TODO : animated night backdrop
+		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight); // TODO : animated night backdrop
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

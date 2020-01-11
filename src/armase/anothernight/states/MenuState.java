@@ -29,7 +29,7 @@ public class MenuState extends State {
 		super(handler);
 		
 //		handler.getBackdropManager().setCurrentBackdropImage(Assets.mainMenuBackdrop);
-		handler.getBackdropManager().setCurrentBackdrop(Assets.test);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight);
 		
 		enemy = generateRndEnemy();
 		int enemyPosX = handler.getWidth() - enemy.getWidth() - 10;

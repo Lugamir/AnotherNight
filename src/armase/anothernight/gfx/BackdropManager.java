@@ -20,7 +20,7 @@ public class BackdropManager {
 		int animSpeed = 300;
 
 		currentBackdrop = Assets.placeholder;
-		animBackdrop = new Animation(animSpeed, Assets.nightBackdrop);
+		animBackdrop = new Animation(animSpeed, Assets.placeholders);
 	}
 	
 	public void tick() {

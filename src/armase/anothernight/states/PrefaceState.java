@@ -26,7 +26,7 @@ public class PrefaceState extends State {
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
 		
-		handler.getBackdropManager().setCurrentBackdrop(Assets.prefaceBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.black);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

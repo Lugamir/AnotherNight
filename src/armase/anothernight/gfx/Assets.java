@@ -13,11 +13,11 @@ public class Assets {
 	public static BufferedImage placeholder;
 	public static BufferedImage[] placeholders;
 	
-	// Backdrops // TODO : Animate
-	public static BufferedImage prefaceBackdrop, scoreboardBackdrop;
-	public static BufferedImage gameOverBackdrop, winBackdrop;
-	public static BufferedImage[] mainMenuBackdrop, nightBackdrop;
-	public static BufferedImage test, black;
+	// Backdrops // TODO : Animated Backdrops
+//	public static BufferedImage prefaceBackdrop, scoreboardBackdrop;
+//	public static BufferedImage gameOverBackdrop, winBackdrop;
+//	public static BufferedImage[] mainMenuBackdrop, nightBackdrop;
+	public static BufferedImage forestNight, black;
 
 	// UI Elements	
 	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok, btn_tutorial;
@@ -84,7 +84,7 @@ public class Assets {
 		for (int i = 0; i < logo.length; i++)
 			logo[i] = logoSheet.crop(64 * i, 0, 64, 80);
 		
-		// Placeholder
+		// Placeholders
 		placeholder = ImageLoader.loadImage("/backdrops/placeholder.jpg");
 		placeholders = new BufferedImage[2];
 		placeholders[0] = missingSheet.crop(width * 0, 0, width, height);
@@ -94,14 +94,14 @@ public class Assets {
 //		mainMenuBackdrop = new BufferedImage[2];
 //		for (int i = 0; i < mainMenuBackdrop.length; i++)
 //			mainMenuBackdrop[i] = mainMenuSheet.crop(800 * i, 0, 800, 600);
-		prefaceBackdrop = ImageLoader.loadImage("/backdrops/black.png");
+//		prefaceBackdrop = ImageLoader.loadImage("/backdrops/black.png");
 //		nightBackdrop = new BufferedImage[4];
 //		for (int i = 0; i < nightBackdrop.length; i++)
 //			nightBackdrop[i] = nightSheet.crop(800 * i, 0, 800, 600);
-		gameOverBackdrop = ImageLoader.loadImage("/backdrops/black.png");
-		winBackdrop = ImageLoader.loadImage("/backdrops/forest_night.png");
-		scoreboardBackdrop = ImageLoader.loadImage("/backdrops/black.png");
-		test = ImageLoader.loadImage("/backdrops/forest_night.png");
+//		gameOverBackdrop = ImageLoader.loadImage("/backdrops/black.png");
+//		winBackdrop = ImageLoader.loadImage("/backdrops/forest_night.png");
+//		scoreboardBackdrop = ImageLoader.loadImage("/backdrops/black.png");
+		forestNight = ImageLoader.loadImage("/backdrops/forest_night.png");
 		black = ImageLoader.loadImage("/backdrops/black.png");
 		
 		// Button Sheet Crops

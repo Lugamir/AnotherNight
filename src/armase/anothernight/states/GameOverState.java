@@ -29,8 +29,8 @@ public class GameOverState extends State {
 		System.out.println("Reached NIGHT : " + dayCount); // TODO : remove test line
 		
 		try {
-			ScoboManager.writeToScobo("Anni", "reached night " + dayCount);
 			// TODO : prompt: add score? name?
+			ScoboManager.writeToScobo("Anni", "reached night " + dayCount);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +38,7 @@ public class GameOverState extends State {
 		int buttonWidth = 128;
 		int buttonHeight = 64;
 		
-		handler.getBackdropManager().setCurrentBackdrop(Assets.gameOverBackdrop);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.black);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);

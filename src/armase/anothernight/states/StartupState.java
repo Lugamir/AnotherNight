@@ -16,7 +16,7 @@ public class StartupState extends State {
 	public StartupState(Handler handler) {
 		super(handler);
 		
-		handler.getBackdropManager().setCurrentBackdrop(Assets.test);
+		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight);
 		uiManager = new UIManager(handler);
 		uiManager.addObject(new AnimatedLogo(handler.getWidth() / 2 - 160, handler.getHeight() / 2 - 200, 320, 400));
 		
