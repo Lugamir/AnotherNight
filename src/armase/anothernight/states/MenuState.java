@@ -12,7 +12,8 @@ import armase.anothernight.entities.creatures.enemies.HiddenBug;
 import armase.anothernight.entities.creatures.enemies.Mushdrool;
 import armase.anothernight.entities.creatures.enemies.SneakySkeleton;
 import armase.anothernight.gfx.Assets;
-import armase.anothernight.ui.AnimatedLogo;
+import armase.anothernight.ui.Logo;
+import armase.anothernight.ui.Title;
 import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
@@ -41,13 +42,15 @@ public class MenuState extends State {
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 		
-		uiManager.addObject(new AnimatedLogo(handler.getWidth() / 100, handler.getHeight() / 100, 64, 80,
+		uiManager.addObject(new Logo(handler.getWidth() / 100, handler.getHeight() / 100, 64, 80,
 			new ClickListener() {
 				@Override
 				public void onClick() {
 					Utils.redirectTo("https://github.com/Tem-Dev/AnotherNight");
 				}
 		}));
+
+		uiManager.addObject(new Title(handler.getWidth() / 2 - 160, handler.getHeight() / 3 - 140, 320, 280));
 		
 		// Start
 		uiManager.addObject(new UIImageButton(200 - 64, handler.getHeight() - 200 - 32, 128, 64, Assets.btn_start,

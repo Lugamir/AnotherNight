@@ -23,7 +23,7 @@ public class Assets {
 	public static BufferedImage[] btn_start, btn_scoreboard, btn_quit, btn_ok, btn_tutorial;
 	public static BufferedImage[] btn_attack, btn_battleCry, btn_shieldsUp;
 	public static BufferedImage[] btn_secret;
-	public static BufferedImage[] night_word, numbers;
+	public static BufferedImage[] title, night_word, numbers;
 	
 	// Logo
 	public static BufferedImage[] logo;
@@ -64,6 +64,7 @@ public class Assets {
 		SpriteSheet anniDeathSheet = new SpriteSheet(ImageLoader.loadImage("/textures/anni_death.png"));
 				
 		SpriteSheet logoSheet = new SpriteSheet(ImageLoader.loadImage("/textures/logo.png"));
+		SpriteSheet titleSheet = new SpriteSheet(ImageLoader.loadImage("/textures/title.png"));
 //		SpriteSheet mainMenuSheet = new SpriteSheet(ImageLoader.loadImage("/backdrops/mainmenu.png"));
 		SpriteSheet buttonSheet = new SpriteSheet(ImageLoader.loadImage("/textures/buttons.png"));
 //		SpriteSheet nightSheet = new SpriteSheet(ImageLoader.loadImage("/backdrops/night.png"));
@@ -83,6 +84,11 @@ public class Assets {
 		logo = new BufferedImage[8];
 		for (int i = 0; i < logo.length; i++)
 			logo[i] = logoSheet.crop(64 * i, 0, 64, 80);
+		
+		// Title
+		title = new BufferedImage[4];
+		for (int i = 0; i < title.length; i++)
+			title[i] = titleSheet.crop(64 * i, 0, 64, 56);
 		
 		// Placeholders
 		placeholder = ImageLoader.loadImage("/backdrops/placeholder.jpg");

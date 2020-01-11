@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 import armase.anothernight.Handler;
 import armase.anothernight.gfx.Assets;
-import armase.anothernight.ui.AnimatedLogo;
+import armase.anothernight.ui.Logo;
 import armase.anothernight.ui.UIManager;
 
 public class StartupState extends State {
@@ -18,7 +18,7 @@ public class StartupState extends State {
 		
 		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight);
 		uiManager = new UIManager(handler);
-		uiManager.addObject(new AnimatedLogo(handler.getWidth() / 2 - 160, handler.getHeight() / 2 - 200, 320, 400));
+		uiManager.addObject(new Logo(handler.getWidth() / 2 - 160, handler.getHeight() / 2 - 200, 320, 400));
 		
 		openMenuAfterMillis(4000);
 	}

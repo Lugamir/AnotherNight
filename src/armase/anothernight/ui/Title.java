@@ -6,20 +6,20 @@ import java.awt.image.BufferedImage;
 import armase.anothernight.gfx.Animation;
 import armase.anothernight.gfx.Assets;
 
-public class AnimatedLogo extends UIObject {
+public class Title extends UIObject {
 	private Animation anim;
 	private ClickListener clicker;
 
-	public AnimatedLogo(float x, float y, int width, int height, ClickListener clicker) {
+	public Title(float x, float y, int width, int height, ClickListener clicker) {
 		super(x, y, width, height);
 		this.clicker = clicker;
-		anim = new Animation(100, Assets.logo);
+		anim = new Animation(300, Assets.title);
 	}
 	
-	public AnimatedLogo(float x, float y, int width, int height) {
+	public Title(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		this.clicker = null;
-		anim = new Animation(100, Assets.logo);
+		anim = new Animation(300, Assets.title);
 	}
 
 	@Override
@@ -35,7 +35,8 @@ public class AnimatedLogo extends UIObject {
 
 	@Override
 	public void onClick() {
-		clicker.onClick();
+		if(clicker != null)
+			clicker.onClick();
 	}
 	
 	private BufferedImage getCurrentNightAnimationFrame() {
