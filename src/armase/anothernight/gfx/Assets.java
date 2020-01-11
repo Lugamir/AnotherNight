@@ -146,7 +146,7 @@ public class Assets {
 		btn_secret[1] = secretSheet.crop(width * 4, 0, width * 4, height * 2);
 		
 		// Player
-		player_idle = new BufferedImage[32];
+		player_idle = new BufferedImage[16];
 		player_attack = new BufferedImage[16];
 		player_battleCry = new BufferedImage[16];
 		player_shieldsUp = new BufferedImage[16];
