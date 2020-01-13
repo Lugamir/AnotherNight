@@ -17,31 +17,27 @@ import armase.anothernight.ui.UIManager;
 import armase.anothernight.utils.Utils;
 
 public class DayState extends State {
-
 	private UIManager uiManager;
 	private EntityManager entityManager;
+	
 	private Creature player, enemy;
 	private int playerPosX, playerPosY;
 	private int enemyPosX, enemyPosY;
 	private final int enemyTypes = 3;
-	private int dayCount, msBetweenTurns;
+	private int dayCount;
 
 	public DayState(Handler handler, Creature player, int dayCount) {
 		super(handler);
 		this.player = player;
 		this.dayCount = dayCount;
-		
-		msBetweenTurns = 1200;
 
 		playerPosX = player.getWidth() / 2;
 		playerPosY = handler.getHeight() / 10 * 5;
+		player.setPosition(playerPosX, playerPosY);
 		
 		enemy = generateRndEnemy();
-		
 		enemyPosX = handler.getWidth() - enemy.getWidth() * 3 / 2;
 		enemyPosY =  handler.getHeight() / 10 * 5;
-
-		player.setPosition(playerPosX, playerPosY);
 		enemy.setPosition(enemyPosX, enemyPosY);
 		
 		entityManager = new EntityManager(handler, player);
@@ -51,7 +47,7 @@ public class DayState extends State {
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
 		
-		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight); // TODO : animated night backdrop
+		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
@@ -65,7 +61,7 @@ public class DayState extends State {
 						if (enemy.isAlive()) {
 							enemyTurn();
 						}
-						changeStateMaybe();
+						tryUpdateState();
 					}
 				}));
 		
@@ -78,7 +74,7 @@ public class DayState extends State {
 						if (enemy.isAlive()) {
 							enemyTurn();
 						}
-						changeStateMaybe();
+						tryUpdateState();
 					}
 				}));
 		
@@ -91,7 +87,7 @@ public class DayState extends State {
 						if (enemy.isAlive()) {
 							enemyTurn();
 						}
-						changeStateMaybe();
+						tryUpdateState();
 					}
 				}));
 		
@@ -101,7 +97,7 @@ public class DayState extends State {
 					public void onClick() {
 						handler.getMouseManager().setUIManager(null); // buttons disappear on state change
 						player.kill();
-						changeStateMaybe();
+						tryUpdateState();
 					}
 				}));
 	}
@@ -151,18 +147,15 @@ public class DayState extends State {
 		enemy.dealDamageToOpponent(player);
 	}
 	
-	private void changeStateMaybe() { // TODO : rename plox
+	private void tryUpdateState() {
 		if (!player.isAlive()) {
 			handler.getMouseManager().setUIManager(null);
-			System.out.println("NIGHTs survived : " + dayCount); // TODO : remove testline
 			State.setState(new GameOverState(handler, player, dayCount));
 		} else if (!enemy.isAlive() && dayCount < 10) {
 			handler.getMouseManager().setUIManager(null);
-			System.out.println("NIGHTs survived : " + dayCount); // TODO : remove testline
 			State.setState(new DayState(handler, player, ++dayCount));
 		} else if (player.isAlive() && !enemy.isAlive() && dayCount >= 10) {
 			handler.getMouseManager().setUIManager(null);
-			System.out.println("NIGHTs survived : " + dayCount); // TODO : remove testline
 			State.setState(new WinState(handler, player));
 		}
 	}

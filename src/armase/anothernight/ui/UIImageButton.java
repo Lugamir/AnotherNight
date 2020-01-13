@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class UIImageButton extends UIObject {
-
 	private BufferedImage[] images;
 	private ClickListener clicker;
 	
@@ -15,9 +14,7 @@ public class UIImageButton extends UIObject {
 	}
 
 	@Override
-	public void tick() {
-		
-	}
+	public void tick() {}
 
 	@Override
 	public void render(Graphics g) {
@@ -31,5 +28,4 @@ public class UIImageButton extends UIObject {
 	public void onClick() {
 		clicker.onClick();
 	}
-
 }

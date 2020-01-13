@@ -9,7 +9,6 @@ import armase.anothernight.Handler;
 // LEAVE IT UNTIL ANOTHER FILE ARRIVES IN THIS PACKAGE (Git is whiny)
 
 public abstract class Entity {
-	
 	protected Handler handler;
 	protected float x, y;
 	protected int width, height;
@@ -29,6 +28,8 @@ public abstract class Entity {
 	
 	public abstract void render(Graphics g);
 
+	// ### GETTERS & SETTERS
+	
 	public float getX() {
 		return x;
 	}
@@ -60,6 +61,4 @@ public abstract class Entity {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
-	
 }

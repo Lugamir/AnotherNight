@@ -8,7 +8,6 @@ import armase.anothernight.gfx.Animation;
 import armase.anothernight.gfx.Assets;
 
 public class NightCounter extends UIObject {
-	
 	private Handler handler;
 	private Animation animNightWord;
 	private int nightCount;

@@ -7,38 +7,16 @@ import java.awt.event.MouseMotionListener;
 import armase.anothernight.ui.UIManager;
 
 public class MouseManager implements MouseListener, MouseMotionListener {
-
-	private boolean leftPressed, rightPressed;
-	private int mouseX, mouseY;
 	private UIManager uiManager;
 	
-	public MouseManager() {
-		
-	}
+	private boolean leftPressed, rightPressed;
+	private int mouseX, mouseY;
+	
+	public MouseManager() {}
 	
 	public void setUIManager(UIManager uiManager) {
 		this.uiManager = uiManager;
 	}
-	
-	// Getters
-	
-	public boolean isLeftPressed() {
-		return leftPressed;
-	}
-	
-	public boolean isRightPressed() {
-		return rightPressed;
-	}
-	
-	public int getMouseX() {
-		return mouseX;
-	}
-	
-	public int getMouseY() {
-		return mouseY;
-	}
-
-	// Implemented Methods
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -69,27 +47,32 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 	}
 	
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseDragged(MouseEvent e) {}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) {}
 
+	// ### GETTERS & SETTERS
+	
+	public boolean isLeftPressed() {
+		return leftPressed;
+	}
+	
+	public boolean isRightPressed() {
+		return rightPressed;
+	}
+	
+	public int getMouseX() {
+		return mouseX;
+	}
+	
+	public int getMouseY() {
+		return mouseY;
+	}
 }

@@ -12,15 +12,14 @@ import armase.anothernight.entities.creatures.enemies.HiddenBug;
 import armase.anothernight.entities.creatures.enemies.Mushdrool;
 import armase.anothernight.entities.creatures.enemies.SneakySkeleton;
 import armase.anothernight.gfx.Assets;
+import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.Logo;
 import armase.anothernight.ui.Title;
-import armase.anothernight.ui.ClickListener;
 import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
 import armase.anothernight.utils.Utils;
 
 public class MenuState extends State {
-
 	private UIManager uiManager;
 	private EntityManager entityManager;
 	private Creature enemy;
@@ -29,7 +28,6 @@ public class MenuState extends State {
 	public MenuState(Handler handler) {
 		super(handler);
 		
-//		handler.getBackdropManager().setCurrentBackdropImage(Assets.mainMenuBackdrop);
 		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight);
 		
 		enemy = generateRndEnemy();
@@ -38,7 +36,6 @@ public class MenuState extends State {
 		enemy.setPosition(enemyPosX, enemyPosY).setHpVisible(false);;
 		
 		entityManager = new EntityManager(handler, enemy);
-		
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 		
@@ -50,6 +47,7 @@ public class MenuState extends State {
 				}
 		}));
 
+		// Title
 		uiManager.addObject(new Title(handler.getWidth() / 2 - 160, handler.getHeight() / 3 - 140, 320, 280));
 		
 		// Start

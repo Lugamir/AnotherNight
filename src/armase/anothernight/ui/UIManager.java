@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import armase.anothernight.Handler;
 
 public class UIManager {
-
 	private Handler handler;
 	private ArrayList<UIObject> objects;
 	
@@ -61,6 +60,4 @@ public class UIManager {
 	public void setObjects(ArrayList<UIObject> objects) {
 		this.objects = objects;
 	}
-
-	
 }

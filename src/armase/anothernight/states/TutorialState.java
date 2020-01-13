@@ -12,32 +12,28 @@ import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
 
 public class TutorialState extends State {
-
 	private UIManager uiManager;
 	private EntityManager entityManager;
+	
 	private Creature player, enemy;
 	private int playerPosX, playerPosY;
 	private int enemyPosX, enemyPosY;
-	private int dayCount, msBetweenTurns;
+	private int dummyCount;
 
 	public TutorialState(Handler handler, Creature player, int dayCount) {
 		super(handler);
 		this.player = player;
-		this.dayCount = dayCount;
-		
-		msBetweenTurns = 1200;
+		this.dummyCount = dayCount;
 
 		playerPosX = player.getWidth() / 2;
 		playerPosY = handler.getHeight() / 10 * 5;
+		player.setPosition(playerPosX, playerPosY);
 		
 		enemy = new Dummy();
-		
 		enemyPosX = handler.getWidth() - enemy.getWidth() * 3 / 2;
 		enemyPosY =  handler.getHeight() / 10 * 5;
-
-		player.setPosition(playerPosX, playerPosY);
 		enemy.setPosition(enemyPosX, enemyPosY);
-		
+
 		entityManager = new EntityManager(handler, player);
 		entityManager.addEntity(enemy);
 		
@@ -45,41 +41,45 @@ public class TutorialState extends State {
 		int buttonHeight = 64;
 		int buttonSpacing = 32;
 		
-		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight); // TODO : animated night backdrop
+		handler.getBackdropManager().setCurrentBackdrop(Assets.forestNight);
 
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 		
+		// Attack Ability
 		uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - buttonWidth / 2 - buttonWidth - buttonSpacing,
 				handler.getHeight() - buttonHeight - buttonSpacing, buttonWidth, buttonHeight, Assets.btn_attack,
 				new ClickListener() {
 					@Override
 					public void onClick() {
 						playerAttack();
-						changeStateMaybe();
+						tryUpdate();
 					}
 				}));
 		
+		// BattleCry Ability
 		uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - buttonWidth / 2,
 				handler.getHeight() - buttonHeight - buttonSpacing, buttonWidth, buttonHeight, Assets.btn_battleCry,
 				new ClickListener() {
 					@Override
 					public void onClick() {
 						playerBattleCry();
-						changeStateMaybe();
+						tryUpdate();
 					}
 				}));
 		
+		// ShieldsUp Ability
 		uiManager.addObject(new UIImageButton(handler.getWidth() / 2 + buttonWidth / 2 + buttonSpacing,
 				handler.getHeight() - buttonHeight - buttonSpacing, buttonWidth, buttonHeight, Assets.btn_shieldsUp,
 				new ClickListener() {
 					@Override
 					public void onClick() {
 						playerShieldsUp();
-						changeStateMaybe();
+						tryUpdate();
 					}
 				}));
 		
+		// OK button to return to Main Menu
 		uiManager.addObject(new UIImageButton(handler.getWidth() / 30, handler.getHeight() / 20, buttonWidth, buttonHeight, Assets.btn_ok,
 				new ClickListener() {
 					@Override
@@ -116,19 +116,10 @@ public class TutorialState extends State {
 		player.buffOwnDefense();
 	}
 	
-	private void changeStateMaybe() { // TODO : rename plox
-		if (!player.isAlive()) {
+	private void tryUpdate() {
+		if (!enemy.isAlive()) {
 			handler.getMouseManager().setUIManager(null);
-			System.out.println("Dummies slain : " + dayCount); // TODO : remove testline
-			State.setState(new GameOverState(handler, player, dayCount));
-		} else if (!enemy.isAlive() && dayCount < 10) {
-			handler.getMouseManager().setUIManager(null);
-			System.out.println("Dummies slain : " + dayCount); // TODO : remove testline
-			State.setState(new TutorialState(handler, player, ++dayCount));
-		} else if (player.isAlive() && !enemy.isAlive() && dayCount >= 10) {
-			handler.getMouseManager().setUIManager(null);
-			System.out.println("Dummies slain : " + dayCount); // TODO : remove testline
-			State.setState(new WinState(handler, player));
+			State.setState(new TutorialState(handler, player, ++dummyCount));
 		}
 	}
 }

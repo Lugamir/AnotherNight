@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import armase.anothernight.Handler;
 
 public class BackdropManager {
-	
 	private Handler handler;
 
 	private BufferedImage currentBackdrop;
@@ -16,7 +15,6 @@ public class BackdropManager {
 	public BackdropManager(Handler handler) {
 		this.handler = handler;
 		
-		// Animations - set anim speed in ms here
 		int animSpeed = 300;
 
 		currentBackdrop = Assets.placeholder;

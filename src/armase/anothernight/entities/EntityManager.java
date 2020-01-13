@@ -8,7 +8,6 @@ import armase.anothernight.entities.creatures.Creature;
 import armase.anothernight.entities.creatures.Player;
 
 public class EntityManager {
-	
 	private Handler handler;
 	private Creature player;
 	private ArrayList<Creature> creatures;
@@ -44,7 +43,7 @@ public class EntityManager {
 		creatures.add(e);
 	}
 	
-	// GETTERS & SETTERS
+	// ### GETTERS & SETTERS
 	
 	public Handler getHandler() {
 		return handler;
@@ -69,6 +68,4 @@ public class EntityManager {
 	public void setEntities(ArrayList<Creature> entities) {
 		this.creatures = entities;
 	}
-	
-	
 }

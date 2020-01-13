@@ -13,9 +13,8 @@ import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
 
 public class WinState extends State {
-	
-	UIManager uiManager;
-	Creature player;
+	private UIManager uiManager;
+	private Creature player;
 
 	private String winMsg1 = "Wow, girlie! You've proven yourself. Let me introduce you to the boys...";
 	private String winMsg2 = "Congrats, you won!";
@@ -24,11 +23,9 @@ public class WinState extends State {
 		super(handler);
 		this.player = player;
 		
-		System.out.println("Won with " + player.getCurrentHp() + " HP left!"); // TODO : remove testline
-		
 		try {
 			// TODO : prompt: add score? name?
-			ScoboManager.writeToScobo("Anni", "survived night 10!");
+			ScoboManager.writeToScobo(player.getName(), "survived night 10!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

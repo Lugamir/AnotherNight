@@ -10,7 +10,6 @@ import armase.anothernight.ui.Logo;
 import armase.anothernight.ui.UIManager;
 
 public class StartupState extends State {
-
 	private UIManager uiManager;
 	
 	public StartupState(Handler handler) {
@@ -20,7 +19,7 @@ public class StartupState extends State {
 		uiManager = new UIManager(handler);
 		uiManager.addObject(new Logo(handler.getWidth() / 2 - 160, handler.getHeight() / 2 - 200, 320, 400));
 		
-		openMenuAfterMillis(3600);
+		openMenuAfterMs(3600);
 	}
 
 	@Override
@@ -35,13 +34,13 @@ public class StartupState extends State {
 		uiManager.render(g);
 	}
 	
-	public void openMenuAfterMillis(long delay) {
+	public void openMenuAfterMs(int delayInMs) {
 	    TimerTask task = new TimerTask() {
 	        public void run() {
 	    		State.setState(new MenuState(handler));
 	        }
 	    };
 	    Timer timer = new Timer("Timer");
-	    timer.schedule(task, delay);
+	    timer.schedule(task, delayInMs);
 	}
 }

@@ -3,7 +3,6 @@ package armase.anothernight.gfx;
 import java.awt.image.BufferedImage;
 
 public class Animation {
-
 	private int speed, index;
 	private long lastTime, timer;
 	private BufferedImage[] frames;
@@ -43,19 +42,4 @@ public class Animation {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-	
-//	public boolean isOnFirstFrame() {
-//		if (index == 0)
-//			return true;
-//		else
-//			return false;
-//	}
-//	
-//	public boolean isOnLastFrame() {
-//		if (index >= frames.length - 1)
-//			return true;
-//		else
-//			return false;
-//	}
-	
 }

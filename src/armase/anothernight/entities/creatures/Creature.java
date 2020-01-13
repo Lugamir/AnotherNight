@@ -9,7 +9,6 @@ import armase.anothernight.ui.Healthbar;
 import armase.anothernight.utils.Utils;
 
 public abstract class Creature {
-	
 	protected Handler handler;
 	protected boolean isEnemy;
 	protected boolean needsAnimChange = false;
@@ -19,10 +18,10 @@ public abstract class Creature {
 	protected Animation currentAnim, animIdle, animAttack, animBattleCry, animShieldsUp, animDeath;
 	protected int animSpeed = 300;
 	
-	// Position // TODO : size responsiveness
+	// Position
 	protected int xPos = 80, yPos = 400;
 	
-	// Size // TODO : size responsiveness
+	// Size
 	protected int width = 160, height = 160;
 	
 	// Stats
@@ -60,8 +59,7 @@ public abstract class Creature {
 	}
 	
 	public void tick() {
-		// Tick all active animations here!
-
+		// TODO : fix the ugly
 		if (!(currentAnim == animDeath && currentAnim.getIndex() >= currentAnim.getMaxIndex()))
 			currentAnim.tick();
 		
@@ -138,9 +136,9 @@ public abstract class Creature {
 	public void debuffPowerOfOpponent(Creature receiver) {
 		currentAnim = animBattleCry;
 		currentAnim.setIndex(3);
-		this.buffPower(1); // TODO : diminishing returns
-		receiver.debuffPower(1); // TODO : diminishing returns
-		receiver.buffDefense(1); // TODO : diminishing returns
+		this.buffPower(1);
+		receiver.debuffPower(1);
+		receiver.buffDefense(1);
 		Utils.waitInMs(msBetweenTurns);
 		currentAnim = animIdle;
 	}
@@ -157,7 +155,7 @@ public abstract class Creature {
 	public void buffOwnDefense() {
 		currentAnim = animShieldsUp;
 		currentAnim.setIndex(3);
-		this.buffDefense(1); // TODO : diminishing returns
+		this.buffDefense(1);
 		Utils.waitInMs(msBetweenTurns);
 		currentAnim = animIdle;
 	}

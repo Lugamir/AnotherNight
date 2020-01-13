@@ -5,10 +5,7 @@ import java.awt.Graphics;
 import armase.anothernight.Handler;
 
 public abstract class State {
-	
-	// Game State Manager
 	private static State currentState = null;
-	
 	protected Handler handler;
 	
 	public State(Handler handler) {

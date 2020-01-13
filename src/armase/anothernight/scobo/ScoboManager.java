@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import armase.anothernight.utils.Utils;
@@ -20,9 +19,10 @@ public class ScoboManager {
 	public static void initScobo() throws IOException {
 		scoboPath = Utils.getGameFolderFile() + File.separator + "scores";
 		scoboFile = new File(scoboPath);
+		
 		if(!scoboFile.exists())
 			System.out.println(scoboFile.createNewFile());
-//		scoboWriter = new PrintWriter(scoboPath, "UTF-8"); // TODO HERE LIES THE POOP...?
+		
 		scoboWriter = new BufferedWriter(
                 new FileWriter(scoboPath, true)); // true for append mode  
 	}
@@ -39,19 +39,12 @@ public class ScoboManager {
 	}
 	
 	public static void writeToScobo(String name, String score) throws IOException {
-//		try {
-//			scoboWriter = new PrintWriter(scoboPath, "UTF-8");
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
 		scoboWriter.write(Utils.getDateTimeStamp() + ";" + name + ";" + score + ";" + "\n");
 		scoboWriter.flush();
-//		scoboWriter.close();
+//		scoboWriter.close(); breaks stuff
 	}
 	
-	public static boolean scoboMatrixIsEmpty(ArrayList<String[]> scoboMatrix) {
+	public static boolean isScoboMatrixEmpty(ArrayList<String[]> scoboMatrix) {
 		boolean onlyWhitespaces = true;
 		for(String[] line : scoboMatrix) {
 			for(int i = 0; i < line.length; i++) {

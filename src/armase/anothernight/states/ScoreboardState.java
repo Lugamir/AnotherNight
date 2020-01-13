@@ -13,7 +13,6 @@ import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
 
 public class ScoreboardState extends State {
-	
 	private UIManager uiManager;
 	private String text;
 	private ArrayList<String> scoboEntries;
@@ -42,10 +41,13 @@ public class ScoreboardState extends State {
 					}
 				}));
 		
-		// Load Scoreboard
+		tryLoadScoreboard();
+	}
+
+	private void tryLoadScoreboard() {
 		try {
 			ArrayList<String[]> scoboMatrix = ScoboManager.loadScoreboardMatrix();
-			if(!ScoboManager.scoboMatrixIsEmpty(scoboMatrix)) {
+			if(!ScoboManager.isScoboMatrixEmpty(scoboMatrix)) {
 				scoboEntries.add("Scores found:");
 				for(String[] line : scoboMatrix) {
 					for(int i = 0; i < line.length; i++) {
@@ -61,15 +63,6 @@ public class ScoreboardState extends State {
 			scoboEntries.add("Something went wrong, toss your admin a coin!");
 			e.printStackTrace();
 		}
-		
-//		uiManager.addObject(new UIImageButton(handler.getWidth() - buttonWidth - buttonSpacing, buttonSpacing, buttonWidth, buttonHeight, GFXwriter.createBufferedImageFromMsg(text, handler.getWidth(), handler.getHeight()),
-//				new ClickListener() {
-//					@Override
-//					public void onClick() {
-//						handler.getMouseManager().setUIManager(null); // buttons disappear on state change
-//						State.setState(new MenuState(handler));
-//					}
-//				}));
 	}
 
 	@Override
@@ -89,8 +82,5 @@ public class ScoreboardState extends State {
 			GFXwriter.write(g, entry, handler.getWidth() / 10,
 					yStart += 32, handler.getWidth());
 		}
-		
-//		GFXwriter.write(g, text, handler.getWidth() / 10,
-//				handler.getHeight() / 12, handler.getWidth() / 10 * 9);
 	}
 }

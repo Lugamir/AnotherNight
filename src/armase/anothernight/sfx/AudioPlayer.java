@@ -1,4 +1,4 @@
-package armase.anothernight.audio;
+package armase.anothernight.sfx;
 
 //Java program to play an Audio 
 //file using Clip Object 
@@ -13,7 +13,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class AudioPlayer implements Runnable {
-
 	// to store current position
 	Long currentFrame;
 	Clip clip;
@@ -62,12 +61,9 @@ public class AudioPlayer implements Runnable {
 					break;
 			}
 			sc.close();
-		}
-
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			System.out.println("Error with playing sound.");
 			ex.printStackTrace();
-
 		}
 	}
 
@@ -93,9 +89,7 @@ public class AudioPlayer implements Runnable {
 			long c1 = sc.nextLong();
 			jump(c1);
 			break;
-
 		}
-
 	}
 
 	// Method to play the audio
@@ -164,5 +158,4 @@ public class AudioPlayer implements Runnable {
 		clip.open(audioInputStream);
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
-
 }

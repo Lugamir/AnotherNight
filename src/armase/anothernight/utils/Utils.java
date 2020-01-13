@@ -13,7 +13,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Utils {
-	
 	public static String gameFolderPath = System.getProperty("user.home")
 			+ File.separator + "Documents" + File.separator + "AnotherNight";
 	public static File gameFolderFile = new File(gameFolderPath);
@@ -62,7 +61,7 @@ public class Utils {
 	public static String readConsoleInput() {
 		Scanner scanner = new Scanner(System.in);
 		String outString = scanner.next().toString();
-		// scanner.close() breaks stuff
+//		scanner.close(); breaks stuff
 		return outString;
 	}
 	
@@ -81,6 +80,8 @@ public class Utils {
 			e.printStackTrace();
 		}
 	}
+	
+	// ### GETTERS & SETTERS
 	
 	public static String getDateTimeStamp() {
 		Date today = new Date();

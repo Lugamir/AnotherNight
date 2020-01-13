@@ -6,13 +6,11 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class Display {
-	
 	private JFrame frame;
 	private Canvas canvas;
 
 	private String title;
 	private int width, height;
-	
 	
 	public Display(String title, int width, int height) {
 		this.title = title;
@@ -39,6 +37,8 @@ public class Display {
 		frame.add(canvas);
 		frame.pack();
 	}
+	
+	// ### GETTERS & SETTERS
 
 	public Canvas getCanvas() {
 		return canvas;

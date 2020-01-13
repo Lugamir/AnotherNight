@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
-	
 	private boolean[] keys;
 	public boolean up, down, left, right;
 	
@@ -22,7 +21,7 @@ public class KeyManager implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;
-		System.out.println("KeyCode " + e.getKeyCode() + " [ " + e.getKeyChar() + " ] pressed!");
+//		System.out.println("KeyCode " + e.getKeyCode() + " [ " + e.getKeyChar() + " ] pressed!");
 	}
 
 	@Override
@@ -31,7 +30,5 @@ public class KeyManager implements KeyListener {
 	}
 	
 	@Override
-	public void keyTyped(KeyEvent e) {
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 }

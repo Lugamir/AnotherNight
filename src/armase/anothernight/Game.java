@@ -4,10 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import armase.anothernight.audio.AudioPlayer;
 import armase.anothernight.display.Display;
 import armase.anothernight.gfx.Assets;
 import armase.anothernight.gfx.BackdropManager;
@@ -19,9 +15,7 @@ import armase.anothernight.states.State;
 import armase.anothernight.utils.Utils;
 
 public class Game implements Runnable {
-	
 	private Display display;
-	private int width, height;
 	
 	private boolean running = false;
 	private Thread thread;
@@ -29,18 +23,13 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	// Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
-	
-	// Backdrop
 	private BackdropManager backdropManager;
-	
-	// Handler
 	private Handler handler;
 
-	// Game Variables
 	public String title;
+	private int width, height;
 		
 	public Game(String title, int width, int height) {
 		this.title = title;
@@ -51,18 +40,15 @@ public class Game implements Runnable {
 		mouseManager = new MouseManager();
 		
 		// Works in IDE but not in JAR, leave for reference
-		try {
-			new AudioPlayer();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			new AudioPlayer();
+//		} catch (UnsupportedAudioFileException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (LineUnavailableException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	private void init() {
@@ -81,12 +67,11 @@ public class Game implements Runnable {
 		display.getFrame().addMouseMotionListener(mouseManager);
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
-		Assets.init();
 		
+		Assets.init();
 		handler = new Handler(this);
 		backdropManager = new BackdropManager(handler);
 		
-//		State.setState(new MenuState(handler));
 		State.setState(new StartupState(handler));
 	}
 	
@@ -94,12 +79,12 @@ public class Game implements Runnable {
 		init();
 		
 		int fps = 60; // tick&renders per second
-		double timePerTick = 1_000_000_000 / fps; // max amount of time to execute tick&renders to achieve fps
+		double timePerTick = 1_000_000_000 / fps; // max time given to execute tick&renders to achieve fps
 		double delta = 0; // tick&renders to do to keep the pace
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
-		int ticks = 0;
+		int ticks = 0; // for fps counter output
 		
 		while(running) {
 			now = System.nanoTime();
@@ -116,7 +101,7 @@ public class Game implements Runnable {
 			
 			if(timer >= 1_000_000_000) {
 //				System.out.println("Ticks & Frames: " + ticks);
-				// TODO : devtool graphical fps counter
+				// TODO : devtool - graphical fps counter
 				ticks = 0;
 				timer = 0;
 			}
@@ -125,7 +110,7 @@ public class Game implements Runnable {
 		stop();
 	}
 	
-	private void tick() { // == update buffers
+	private void tick() {
 		keyManager.tick();
 		
 		if(State.getState() != null)
@@ -141,10 +126,9 @@ public class Game implements Runnable {
 		}
 		
 		g = bs.getDrawGraphics();
-		// Clear Screen
-		g.clearRect(0, 0, width, height);
-		// Draw Here!
+		g.clearRect(0, 0, width, height); // Clear Screen
 		
+		// Draw Stuff
 		if(State.getState() != null)
 			State.getState().render(g);
 		

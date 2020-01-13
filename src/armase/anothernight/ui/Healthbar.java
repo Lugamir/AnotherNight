@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import armase.anothernight.entities.creatures.Creature;
 
 public class Healthbar extends UIObject {
-	
 	protected Creature creature;
 	double hpHeight, maxHpWidth, currentHpWidth;
 	int border;

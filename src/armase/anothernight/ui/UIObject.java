@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 public abstract class UIObject {
-
 	protected float x, y;
 	protected int width, height;
 	protected Rectangle bounds;

@@ -13,10 +13,9 @@ import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
 
 public class GameOverState extends State {
-	
-	UIManager uiManager;
-	Creature player;
-	int dayCount;
+	private UIManager uiManager;
+	private Creature player;
+	private int dayCount;
 
 	private String loseMsg1 = "This is exactly why we don't accept     girlies in our guild!";
 	private String loseMsg2 = "You died, game over!";
@@ -25,8 +24,6 @@ public class GameOverState extends State {
 		super(handler);
 		this.player = player;
 		this.dayCount = dayCount;
-		
-		System.out.println("Reached NIGHT : " + dayCount); // TODO : remove test line
 		
 		try {
 			// TODO : prompt: add score? name?
@@ -48,8 +45,6 @@ public class GameOverState extends State {
 				new ClickListener() {
 					@Override
 					public void onClick() {
-						// TODO : fix, writeToScobo does not write to scobo
-//						ScoboManager.writeToScobo("BobTheBuilder", "reached night " + dayCount); // TODO : prompt: add score? name?
 						handler.getMouseManager().setUIManager(null); // buttons disappear on state change
 						State.setState(new MenuState(handler));
 					}

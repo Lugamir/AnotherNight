@@ -9,6 +9,7 @@ public class Vegeta extends Player {
 	public Vegeta() {
 		super();
 		
+		name = "Vegeta";
 		currentHp = 9001;
 		maxHp = 9001;
 		power = 9001;
@@ -17,11 +18,11 @@ public class Vegeta extends Player {
 	
 	public Vegeta(Handler handler) {
 		super(handler);
-		
+
+		name = "Vegeta";
 		currentHp = 9001;
 		maxHp = 9001;
 		power = 9001;
 		defense = 9001;
 	}
-
 }

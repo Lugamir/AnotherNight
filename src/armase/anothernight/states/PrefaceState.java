@@ -11,7 +11,6 @@ import armase.anothernight.ui.UIImageButton;
 import armase.anothernight.ui.UIManager;
 
 public class PrefaceState extends State {
-	
 	private UIManager uiManager;
 	
 	private String introMsg1 = "Another Night is a story about a girl   named Anni."
