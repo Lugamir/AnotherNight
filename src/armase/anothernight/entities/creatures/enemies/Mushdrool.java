@@ -11,9 +11,9 @@ public class Mushdrool extends Creature {
 		super("Mushdrool", 20, 20, 8, 15);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
-		animAttack = new Animation(animSpeed, Assets.mushdrool_attack);
-		animDeath = new Animation(animSpeed, Assets.mushdrool_death);
+		animIdle = new Animation(Assets.mushdrool_idle);
+		animAttack = new Animation(Assets.mushdrool_attack);
+		animDeath = new Animation(Assets.mushdrool_death);
 		currentAnim = animIdle;
 	}
 	
@@ -21,9 +21,9 @@ public class Mushdrool extends Creature {
 		super("Mushdrool", 20, 20, 8, 15, handler);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.mushdrool_idle);
-		animAttack = new Animation(animSpeed, Assets.mushdrool_attack);
-		animDeath = new Animation(animSpeed, Assets.mushdrool_death);
+		animIdle = new Animation(Assets.mushdrool_idle);
+		animAttack = new Animation(Assets.mushdrool_attack);
+		animDeath = new Animation(Assets.mushdrool_death);
 		currentAnim = animIdle;
 	}
 }

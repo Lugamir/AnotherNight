@@ -11,9 +11,9 @@ public class SneakySkeleton extends Creature {
 		super("Sneaky Skeleton", 10, 10, 5, 3);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.skeleton_idle);
-		animAttack = new Animation(animSpeed, Assets.skeleton_attack);
-		animDeath = new Animation(animSpeed, Assets.skeleton_death);
+		animIdle = new Animation(Assets.skeleton_idle);
+		animAttack = new Animation(Assets.skeleton_attack);
+		animDeath = new Animation(Assets.skeleton_death);
 		currentAnim = animIdle;
 	}
 	
@@ -21,9 +21,9 @@ public class SneakySkeleton extends Creature {
 		super("Sneaky Skeleton", 10, 10, 5, 3, handler);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.skeleton_idle);
-		animAttack = new Animation(animSpeed, Assets.skeleton_attack);
-		animDeath = new Animation(animSpeed, Assets.skeleton_death);
+		animIdle = new Animation(Assets.skeleton_idle);
+		animAttack = new Animation(Assets.skeleton_attack);
+		animDeath = new Animation(Assets.skeleton_death);
 		currentAnim = animIdle;
 	}
 }

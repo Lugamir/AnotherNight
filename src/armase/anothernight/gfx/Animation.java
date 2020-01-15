@@ -2,17 +2,21 @@ package armase.anothernight.gfx;
 
 import java.awt.image.BufferedImage;
 
+import armase.anothernight.properties.Props;
+
 public class Animation {
-	private int speed, index;
-	private long lastTime, timer;
+	private int speed = Props.DEFAULT_ANIM_SPEED;
+	private int index = 0;
+	private long lastTime, timer = 0;
 	private BufferedImage[] frames;
-	
-	public Animation(int speed, BufferedImage[] frames) {
-		this.speed = speed;
+
+	public Animation(BufferedImage[] frames) {
 		this.frames = frames;
-		index = 0;
-		timer = 0;
-		lastTime = System.currentTimeMillis();
+	}
+	
+	public Animation(BufferedImage[] frames, int speed) {
+		this.frames = frames;
+		this.speed = speed;
 	}
 	
 	public void tick() {

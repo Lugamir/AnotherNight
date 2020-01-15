@@ -37,9 +37,7 @@ public class Healthbar extends UIObject {
 	}
 
 	@Override
-	public void onClick() {
-		
-	}
+	public void onClick() {}
 	
 	private void updatePositionVariables() {
 		x = creature.getxPos();

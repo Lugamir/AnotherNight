@@ -12,9 +12,10 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
+import armase.anothernight.properties.Props;
+
 public class Utils {
-	private static String gameFolderPath = System.getProperty("user.home")
-			+ File.separator + "Documents" + File.separator + "AnotherNight";
+	private static String gameFolderPath = Props.GAME_FOLDER_PATH;
 	private static File gameFolderFile = new File(gameFolderPath);
 
 	public static String loadFileAsString(String path) {

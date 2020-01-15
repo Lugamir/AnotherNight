@@ -9,17 +9,18 @@ import armase.anothernight.gfx.Assets;
 public class Logo extends UIObject {
 	private Animation anim;
 	private ClickListener clicker;
+	private int animSpeed = 100;
 
 	public Logo(float x, float y, int width, int height, ClickListener clicker) {
 		super(x, y, width, height);
 		this.clicker = clicker;
-		anim = new Animation(100, Assets.logo);
+		anim = new Animation(Assets.logo, animSpeed);
 	}
 	
 	public Logo(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		this.clicker = null;
-		anim = new Animation(100, Assets.logo);
+		anim = new Animation(Assets.logo, animSpeed);
 	}
 
 	@Override

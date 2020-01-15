@@ -14,11 +14,9 @@ public class BackdropManager {
 
 	public BackdropManager(Handler handler) {
 		this.handler = handler;
-		
-		int animSpeed = 300;
 
 		currentBackdrop = Assets.placeholder;
-		animBackdrop = new Animation(animSpeed, Assets.placeholders);
+		animBackdrop = new Animation(Assets.placeholders);
 	}
 	
 	public void tick() {
@@ -42,7 +40,7 @@ public class BackdropManager {
 	}
 	
 	public void setCurrentBackdrop(BufferedImage[] animBackdrop) {
-		this.animBackdrop = new Animation(300, animBackdrop);
+		this.animBackdrop = new Animation(animBackdrop);
 		isAnimated = true;
 	}
 }

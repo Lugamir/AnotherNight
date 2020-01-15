@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import armase.anothernight.Handler;
 import armase.anothernight.gfx.Animation;
+import armase.anothernight.properties.Props;
 import armase.anothernight.ui.Healthbar;
 import armase.anothernight.utils.Utils;
 
@@ -16,7 +17,7 @@ public abstract class Creature {
 
 	// Animations
 	protected Animation currentAnim, animIdle, animAttack, animBattleCry, animShieldsUp, animDeath;
-	protected int animSpeed = 300;
+	protected int animSpeed = Props.DEFAULT_ANIM_SPEED;
 	
 	// Position
 	protected int xPos = 80, yPos = 400;

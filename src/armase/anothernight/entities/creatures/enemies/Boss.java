@@ -11,18 +11,18 @@ public class Boss extends Creature {
 		super("Weary Dragon", 25, 100, 17, 15);
 		isEnemy = true;
 
-		animIdle = new Animation(animSpeed, Assets.placeholders);
-		animAttack = new Animation(animSpeed, Assets.placeholders);
-		animDeath = new Animation(animSpeed, Assets.placeholders);
+		animIdle = new Animation(Assets.placeholders);
+		animAttack = new Animation(Assets.placeholders);
+		animDeath = new Animation(Assets.placeholders);
 		currentAnim = animIdle;
 	}
 	
 	public Boss(Handler handler) {
 		super("Weary Dragon", 25, 100, 17, 15, handler);
 
-		animIdle = new Animation(animSpeed, Assets.placeholders);
-		animAttack = new Animation(animSpeed, Assets.placeholders);
-		animDeath = new Animation(animSpeed, Assets.placeholders);
+		animIdle = new Animation(Assets.placeholders);
+		animAttack = new Animation(Assets.placeholders);
+		animDeath = new Animation(Assets.placeholders);
 		currentAnim = animIdle;
 	}
 }

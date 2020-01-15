@@ -13,13 +13,13 @@ public class Title extends UIObject {
 	public Title(float x, float y, int width, int height, ClickListener clicker) {
 		super(x, y, width, height);
 		this.clicker = clicker;
-		anim = new Animation(300, Assets.title);
+		anim = new Animation(Assets.title);
 	}
 	
 	public Title(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		this.clicker = null;
-		anim = new Animation(300, Assets.title);
+		anim = new Animation(Assets.title);
 	}
 
 	@Override

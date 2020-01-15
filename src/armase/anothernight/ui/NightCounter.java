@@ -16,7 +16,7 @@ public class NightCounter extends UIObject {
 	public NightCounter(Handler handler, int nightCount, ClickListener clicker) {
 		super(handler.getWidth() / 30, handler.getHeight() / 10, 128, 64);
 		this.handler = handler;
-		animNightWord = new Animation(300, Assets.night_word);
+		animNightWord = new Animation(Assets.night_word);
 		this.nightCount = nightCount;
 		this.clicker = clicker;
 	}

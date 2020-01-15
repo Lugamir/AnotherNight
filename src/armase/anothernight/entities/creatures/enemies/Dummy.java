@@ -11,9 +11,9 @@ public class Dummy extends Creature {
 		super("Fred the Dummy", 100, 100, 0, 12);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.dummy_all);
-		animAttack = new Animation(animSpeed, Assets.dummy_all);
-		animDeath = new Animation(animSpeed, Assets.dummy_all);
+		animIdle = new Animation(Assets.dummy_all);
+		animAttack = new Animation(Assets.dummy_all);
+		animDeath = new Animation(Assets.dummy_all);
 		currentAnim = animIdle;
 	}
 	
@@ -21,9 +21,9 @@ public class Dummy extends Creature {
 		super("Fred the Dummy", 100, 100, 0, 12, handler);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.dummy_all);
-		animAttack = new Animation(animSpeed, Assets.dummy_all);
-		animDeath = new Animation(animSpeed, Assets.dummy_all);
+		animIdle = new Animation(Assets.dummy_all);
+		animAttack = new Animation(Assets.dummy_all);
+		animDeath = new Animation(Assets.dummy_all);
 		currentAnim = animIdle;
 	}
 }

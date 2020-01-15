@@ -11,9 +11,9 @@ public class HiddenBug extends Creature {
 		super("Hidden Bug", 1, 1, 1, 1);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.placeholders);
-		animAttack = new Animation(animSpeed, Assets.placeholders);
-		animDeath = new Animation(animSpeed, Assets.placeholders);
+		animIdle = new Animation(Assets.placeholders);
+		animAttack = new Animation(Assets.placeholders);
+		animDeath = new Animation(Assets.placeholders);
 		currentAnim = animIdle;
 	}
 	
@@ -21,9 +21,9 @@ public class HiddenBug extends Creature {
 		super("Hidden Bug", 1, 1, 1, 1, handler);
 		isEnemy = true;
 		
-		animIdle = new Animation(animSpeed, Assets.placeholders);
-		animAttack = new Animation(animSpeed, Assets.placeholders);
-		animDeath = new Animation(animSpeed, Assets.placeholders);
+		animIdle = new Animation(Assets.placeholders);
+		animAttack = new Animation(Assets.placeholders);
+		animDeath = new Animation(Assets.placeholders);
 		currentAnim = animIdle;
 	}
 }

@@ -9,6 +9,7 @@ import armase.anothernight.gfx.Assets;
 import armase.anothernight.gfx.BackdropManager;
 import armase.anothernight.input.KeyManager;
 import armase.anothernight.input.MouseManager;
+import armase.anothernight.properties.Props;
 import armase.anothernight.scobo.ScoboManager;
 import armase.anothernight.states.StartupState;
 import armase.anothernight.states.State;
@@ -78,7 +79,7 @@ public class Game implements Runnable {
 	public void run() {
 		init();
 		
-		int fps = 60; // tick&renders per second
+		int fps = Props.FPS; // tick&renders per second
 		double timePerTick = 1_000_000_000 / fps; // max time given to execute tick&renders to achieve fps
 		double delta = 0; // tick&renders to do to keep the pace
 		long now;
