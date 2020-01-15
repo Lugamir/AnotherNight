@@ -13,9 +13,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Utils {
-	public static String gameFolderPath = System.getProperty("user.home")
+	private static String gameFolderPath = System.getProperty("user.home")
 			+ File.separator + "Documents" + File.separator + "AnotherNight";
-	public static File gameFolderFile = new File(gameFolderPath);
+	private static File gameFolderFile = new File(gameFolderPath);
 
 	public static String loadFileAsString(String path) {
 		StringBuilder builder = new StringBuilder();
