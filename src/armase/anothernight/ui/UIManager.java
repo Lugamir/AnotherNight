@@ -3,12 +3,16 @@ package armase.anothernight.ui;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import armase.anothernight.Handler;
 
 public class UIManager {
 	private Handler handler;
 	private ArrayList<UIObject> objects;
+	private boolean uiActive = true;
+	private int disableTime = 300;
 	
 	public UIManager(Handler handler) {
 		this.handler = handler;
@@ -26,13 +30,23 @@ public class UIManager {
 	}
 	
 	public void onMouseMove(MouseEvent e) {
-		for(UIObject o : objects)
-			o.onMouseMove(e);
+		if(uiActive)
+			for(UIObject o : objects)
+				o.onMouseMove(e);
 	}
 	
 	public void onMouseRelease(MouseEvent e) {
-		for(UIObject o : objects)
-			o.onMouseRelease(e);
+		if(uiActive) {
+			for(UIObject o : objects)
+				o.onMouseRelease(e);
+			
+			uiActive = false;
+			new Timer().schedule(new TimerTask() {
+		        public void run() {
+		        	uiActive = true;
+		        }
+		    }, disableTime);
+		}
 	}
 	
 	public void addObject(UIObject o) {
