@@ -7,12 +7,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import armase.anothernight.Handler;
+import armase.anothernight.properties.Props;
 
 public class UIManager {
 	private Handler handler;
 	private ArrayList<UIObject> objects;
 	private boolean uiActive = true;
-	private int disableTime = 300;
 	
 	public UIManager(Handler handler) {
 		this.handler = handler;
@@ -45,7 +45,7 @@ public class UIManager {
 		        public void run() {
 		        	uiActive = true;
 		        }
-		    }, disableTime);
+		    }, Props.UI_DISABLE_TIME);
 		}
 	}
 	

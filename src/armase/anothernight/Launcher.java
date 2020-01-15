@@ -1,11 +1,12 @@
 package armase.anothernight;
 
+import armase.anothernight.properties.Props;
+
 public class Launcher {
-	private static String gameTitle = "Another Night";
-	private static String version = "BETA v1.1";
-	
+
 	public static void main(String[] args) {
-		Game game = new Game(gameTitle + " - " + version, 800, 600);
+		Game game = new Game(Props.GAME_TITLE + " - " + Props.VERSION,
+							 Props.WINDOW_WIDTH, Props.WINDOW_HEIGHT);
 		game.start();
 	}
 }
