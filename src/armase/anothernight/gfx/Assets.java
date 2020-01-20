@@ -101,45 +101,25 @@ public class Assets {
 		black = ImageLoader.loadImage("/backdrops/black.png");
 		
 		// Button Sheet Crops
-		btn_start = new BufferedImage[2];
-		btn_scoreboard = new BufferedImage[2];
-		btn_quit = new BufferedImage[2];
-		btn_tutorial = new BufferedImage[2];
-		btn_ok = new BufferedImage[2];
-		btn_start[0] =		buttonSheet.crop(0, 0, width * 4, height * 2);
-		btn_start[1] =		buttonSheet.crop(width * 4, 0, width * 4, height * 2);
-		btn_scoreboard[0] =	buttonSheet.crop(0, height * 2, width * 4, height * 2);
-		btn_scoreboard[1] =	buttonSheet.crop(width * 4, height * 2, width * 4, height * 2);
-		btn_quit[0] =		buttonSheet.crop(0, height * 4, width * 4, height * 2);
-		btn_quit[1] =		buttonSheet.crop(width * 4, height * 4, width * 4, height * 2);
-		btn_ok[0] =			buttonSheet.crop(0, height * 6, width * 4, height * 2);
-		btn_ok[1] =			buttonSheet.crop(width * 4, height * 6, width * 4, height * 2);
-		btn_tutorial[0] =	buttonSheet.crop(0, height * 8, width * 4, height * 2);
-		btn_tutorial[1] =	buttonSheet.crop(width * 4, height * 8, width * 4, height * 2);
+		btn_start = initSpriteSheet(2, buttonSheet, width * 4, 0, width*4, height*2);
+		btn_scoreboard = initSpriteSheet(2, buttonSheet, width*4, height * 2, width*4, height*2);
+		btn_quit = initSpriteSheet(2, buttonSheet, width * 4, height * 4, width * 4, height * 2);
+		btn_tutorial = initSpriteSheet(2,buttonSheet, width*4, height * 6, width*4, height*2);
+		btn_ok = initSpriteSheet(2, buttonSheet, width*4, height*8, width*4, height*2);
+
+
 		
 		// Night Counter Crops
-		night_word = new BufferedImage[4];
-		numbers = new BufferedImage[10];
-		for (int i = 0; i < night_word.length; i++)
-			night_word[i] = nightWordSheet.crop(width * 4 * i, 0, width * 4, height * 2);
-		for (int i = 0; i < numbers.length; i++)
-			numbers[i] = numbersSheet.crop(width * i, 0, width, height);
+		night_word = initSpriteSheet(4, nightWordSheet, width*4, 0, width*4, height*2);
+		numbers = initSpriteSheet(10, numbersSheet, width, 0, width, height);
 		
 		// Ability Sheet Crops
-		btn_attack = new BufferedImage[2];
-		btn_battleCry = new BufferedImage[2];
-		btn_shieldsUp = new BufferedImage[2];
-		btn_attack[0] =		abilitySheet.crop(0, 0, width * 4, height * 2);
-		btn_attack[1] =		abilitySheet.crop(width * 4, 0, width * 4, height * 2);
-		btn_battleCry[0] =	abilitySheet.crop(0, height * 2, width * 4, height * 2);
-		btn_battleCry[1] =	abilitySheet.crop(width * 4, height * 2, width * 4, height * 2);
-		btn_shieldsUp[0] =	abilitySheet.crop(0, height * 4, width * 4, height * 2);
-		btn_shieldsUp[1] =	abilitySheet.crop(width * 4, height * 4, width * 4, height * 2);
+		btn_attack = initSpriteSheet(2, abilitySheet, width*4,0, width*4, height*2);
+		btn_battleCry = initSpriteSheet(2, abilitySheet, width*4,height*2, width*4, height*2);
+		btn_shieldsUp = initSpriteSheet(2, abilitySheet, width*4,height*4, width*4, height*2);
 		
 		// Secret Button Crops
-		btn_secret = new BufferedImage[2];
-		btn_secret[0] = secretSheet.crop(0, 0, width * 4, height * 2);
-		btn_secret[1] = secretSheet.crop(width * 4, 0, width * 4, height * 2);
+		btn_secret = initSpriteSheet(2,secretSheet, width*4, 0, width*4, height*2);
 		
 		// Player Crops
 		player_idle = new BufferedImage[16];
@@ -210,5 +190,16 @@ public class Assets {
         for(int i = 0; i < alphabetArray.length; i++) {
             alphabetMap.put(alphabetArray[i], alphabetImages[i]);
         }
+	}
+
+	// Method for Refactoring
+	private static BufferedImage[] initSpriteSheet(int bufferedImageFrames, SpriteSheet spriteSheet, int x, int y, int width, int height){
+		BufferedImage[] bufferedImage = new BufferedImage[bufferedImageFrames];
+		for (int i = 0; i < bufferedImage.length; i++){
+			bufferedImage[i] = spriteSheet.crop(x * i, y, width, height);
+		}
+
+		return bufferedImage;
+
 	}
 }
